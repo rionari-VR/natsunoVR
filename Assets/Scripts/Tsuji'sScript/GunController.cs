@@ -8,18 +8,26 @@ public class GunController : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField]
     private float bulletSpeed;
+    private bool isShoot;
 
     void Start()
     {
-
+        isShoot = false;
     }
     // Update is called once per frame
     void Update()
     {
+        //VRでテストする時はOFFにしてね
         if (Input.GetKeyDown(KeyCode.Z))
         {
             MakeBullet();
         }
+
+        //VRでテストする時はONにしてね
+        //if (isShoot)
+        //{
+        //    MakeBullet();
+        //}
     }
 
     void MakeBullet()
@@ -28,5 +36,10 @@ public class GunController : MonoBehaviour
         Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
         bulletRb.AddForce(transform.forward * bulletSpeed);
         Destroy(bulletObj, 3.0f);
+    }
+
+    public void SetShootFlag()
+    {
+        isShoot = true;
     }
 }
