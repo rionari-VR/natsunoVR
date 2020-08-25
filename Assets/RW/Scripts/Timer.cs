@@ -65,9 +65,8 @@ public class Timer : MonoBehaviour
                 timeNow += 5.0f; //+5s
                 //回転をゆっくりする
                 break;
-
-
             default:
+                break;
         }
 
         seconds = (int)timeNow;
