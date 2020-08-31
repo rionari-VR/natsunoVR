@@ -51,23 +51,23 @@ public class Timer : MonoBehaviour
         }
 
         timeNow -= Time.deltaTime;
-        switch (Status)
-        {
-            case Status.normal:
-                break;
-            case Status.plus10s:
-                timeNow += 10.0f; //+10s
-                break;
-            case Status.plus15s:
-                timeNow += 15.0f; //+15s
-                break;
-            case Status.slowdown_plus5s:
-                timeNow += 5.0f; //+5s
-                //回転をゆっくりする
-                break;
-            default:
-                break;
-        }
+        //switch (Status)
+        //{
+        //    case Status.normal:
+        //        break;
+        //    case Status.plus10s:
+        //        timeNow += 10.0f; //+10s
+        //        break;
+        //    case Status.plus15s:
+        //        timeNow += 15.0f; //+15s
+        //        break;
+        //    case Status.slowdown_plus5s:
+        //        timeNow += 5.0f; //+5s
+        //        //回転をゆっくりする
+        //        break;
+        //    default:
+        //        break;
+        //}
 
         seconds = (int)timeNow;
 		timerText.text= seconds.ToString();

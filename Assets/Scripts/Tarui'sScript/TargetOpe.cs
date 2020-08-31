@@ -5,52 +5,53 @@ using UnityEngine;
 public class TargetOpe : MonoBehaviour
 {
     [SerializeField]
-    GameObject Prefab = null;
+    GameObject obj;
 
-    [SerializeField,Header("ターゲットの個数")]
-    int Count;
+    GameObject child;
 
-    [SerializeField]
-    float R;
+    [SerializeField,Range(0.1f,10.0f)]
+    float spornTime = 1.0f;
 
-    [SerializeField]
-    float Y;
+    // 
+    bool respornFlg  = false;
+
+    float respornTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (Count <= 0)
-        {
-            Debug.LogError("ターゲットがいないよ");
-        }
-        else
-        {
-            float x, y, z;
-            float Rot;
-            x = this.transform.position.x;
-            z = this.transform.position.z;
-
-            y = this.transform.position.y + Y;
-
-            // 角度計算
-            Rot = 360.0f / (float)Count;
-
-            for (int i = 0; i < Count; i++)
-            {
-                float Theta = Rot * i;
-                float ox, oz;
-
-                ox = R * Mathf.Cos(Theta * Mathf.Deg2Rad) + x;
-                oz = R * Mathf.Sin(Theta * Mathf.Deg2Rad) + z;
-
-                Instantiate(Prefab, new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta + 180.0f), 0.0f), this.transform);
-            }
-        }
+        child = this.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(respornFlg)
+        {
+            if (respornTime >= spornTime)
+            {
+                respornFlg = !respornFlg;
+                respornTime = 0.0f;
+
+                // リスポーンの処理
+                child = Instantiate(obj, this.transform.position, Quaternion.identity, this.transform);
+            }
+            else
+            {
+                respornTime += Time.deltaTime;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject == child)
+        {
+            Destroy(child);
+
+            respornFlg = !respornFlg;
+
+            // ここで点数の加算の処理等を行う
+        }
     }
 }
