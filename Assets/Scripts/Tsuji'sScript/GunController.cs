@@ -18,16 +18,17 @@ public class GunController : MonoBehaviour
     void Update()
     {
         //VRでテストする時はOFFにしてね
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            MakeBullet();
-        }
-
-        //VRでテストする時はONにしてね
-        //if (isShoot)
+        //if (Input.GetKeyDown(KeyCode.Z))
         //{
         //    MakeBullet();
         //}
+
+        //VRでテストする時はONにしてね
+        if (isShoot)
+        {
+            isShoot = false;
+            MakeBullet();
+        }
     }
 
     void MakeBullet()
