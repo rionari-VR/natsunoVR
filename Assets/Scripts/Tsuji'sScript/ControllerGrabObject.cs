@@ -27,14 +27,21 @@ public class ControllerGrabObject : MonoBehaviour
         // 1
         if (grabAction.GetLastStateDown(handType))
         {
-            //つかむ処理(銃のみ)
-            if (collidingObject.tag == "Gun")
+            if (collidingObject)
             {
-                GrabObject();
+                //つかむ処理(銃のみ)
+                if (collidingObject.tag == "Gun"　&& objectInHand == null)
+                {
+                    GrabObject();
+                }
+                else if (objectInHand)
+                {
+                    gunController.SetShootFlag();
+                }
             }
-            else if (objectInHand)
+            else
             {
-                gunController.SetShootFlag();
+                Debug.Log("銃ないよ");
             }
         }
         // 2
@@ -55,6 +62,7 @@ public class ControllerGrabObject : MonoBehaviour
         // 1
         if (collidingObject || !col.GetComponent<Rigidbody>())
         {
+           // collidingObject = col.gameObject;
             return;
         }
         // 2
@@ -88,6 +96,7 @@ public class ControllerGrabObject : MonoBehaviour
     //掴む処理
     private void GrabObject()
     {
+        //一つ掴んだら増えないようにすること
         // 1
         objectInHand = collidingObject;
         collidingObject = null;
