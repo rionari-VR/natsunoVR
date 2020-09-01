@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpinField : MonoBehaviour
 {
+    [SerializeField]
+    float SpinSpeed = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,6 @@ public class SpinField : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.transform.eulerAngles += new Vector3(0.0f, 1.0f, 0.0f);
+        this.transform.eulerAngles += new Vector3(0.0f, SpinSpeed, 0.0f);
     }
 }
