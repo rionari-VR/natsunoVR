@@ -131,10 +131,4 @@ public class ControllerGrabObject : MonoBehaviour
         // 4
         objectInHand = null;
     }
-
-    //弾を打つ処理
-    private void ShootBullet()
-    {
-
-    }
 }
