@@ -34,7 +34,9 @@ public class TargetOpe : MonoBehaviour
                 respornTime = 0.0f;
 
                 // リスポーンの処理
-                child = Instantiate(obj, this.transform.position, Quaternion.identity, this.transform);
+                child = Instantiate(obj, this.transform.position + new Vector3(0,-1.0f), Quaternion.identity, this.transform);
+                child.AddComponent<RespornOpe>();
+                child.GetComponent<Collider>().enabled = false;
             }
             else
             {
