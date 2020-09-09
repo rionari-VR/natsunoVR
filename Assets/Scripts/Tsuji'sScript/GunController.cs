@@ -136,4 +136,12 @@ public class GunController : MonoBehaviour
     {
         isShoot = true;
     }
+
+    public void MagReload()
+    {
+        if(mag <= 0)
+        {
+            mag = magMax;
+        }
+    }
 }
