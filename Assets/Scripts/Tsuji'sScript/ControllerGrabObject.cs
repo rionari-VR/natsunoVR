@@ -37,13 +37,17 @@ public class ControllerGrabObject : MonoBehaviour
                 }
                 else if (objectInHand)
                 {
-                    gunController.SetShootFlag();
+                    gunController.SetShootFlag(true);
                 }
             }
             else
             {
                 Debug.Log("銃ないよ");
             }
+        }
+        else
+        {
+            gunController.SetShootFlag(false);
         }
 
         if (triggerAction.GetStateDown(handType))
