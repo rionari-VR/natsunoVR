@@ -65,28 +65,30 @@ public class GunController : MonoBehaviour
                 break;
         }
         //VRでtestするときはオンにしてください
-        //switch (gunType)
-        //{
-        //    case GunType.HandGun:
-        //         if (isShoot)
-        //        {
-        //            isShoot = false;
-        //            HandGunBullet();
-        //        }
-        //        break;
-        //    case GunType.MachineGun:
-        //        if (isShoot)
-        //        {
-        //            MachineGunBullet();
-        //        }
-        //        break;
-        //    case GunType.Magnum:
-        //        if (isShoot)
-        //        {
-        //            MagnumBullet();
-        //        }
-        //        break;
-        //}
+        switch (gunType)
+        {
+           case GunType.HandGun:
+                if (isShoot)
+               {
+                   isShoot = false;
+                   HandGunBullet();
+               }
+               break;
+           case GunType.MachineGun:
+               if (isShoot)
+               {
+                   //isShoot = false;
+                   MachineGunBullet();
+               }
+               break;
+           case GunType.Magnum:
+               if (isShoot)
+               {
+                   //isShoot = false;
+                   MagnumBullet();
+               }
+               break;
+        }
     }
 
     //ハンドガン
@@ -141,6 +143,7 @@ public class GunController : MonoBehaviour
     {
         if(mag <= 0)
         {
+            isShoot = false;
             mag = magMax;
         }
     }
