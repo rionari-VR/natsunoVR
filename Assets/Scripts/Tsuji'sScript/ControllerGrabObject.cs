@@ -9,6 +9,7 @@ public class ControllerGrabObject : MonoBehaviour
     public SteamVR_Input_Sources handType;
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean grabAction;
+    public SteamVR_Action_Boolean triggerAction;
     private GameObject collidingObject; // 1
     private GameObject objectInHand; // 2
     private GunController gunController;
@@ -42,6 +43,14 @@ public class ControllerGrabObject : MonoBehaviour
             else
             {
                 Debug.Log("銃ないよ");
+            }
+        }
+
+        if (triggerAction.GetStateDown(handType))
+        {
+            if (objectInHand)
+            {
+                gunController.MagReload();
             }
         }
         // 2
@@ -130,11 +139,5 @@ public class ControllerGrabObject : MonoBehaviour
         }
         // 4
         objectInHand = null;
-    }
-
-    //弾を打つ処理
-    private void ShootBullet()
-    {
-
     }
 }
