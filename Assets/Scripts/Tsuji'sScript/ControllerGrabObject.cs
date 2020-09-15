@@ -45,11 +45,7 @@ public class ControllerGrabObject : MonoBehaviour
                 Debug.Log("銃ないよ");
             }
         }
-        else
-        {
-            gunController.SetShootFlag(false);
-        }
-
+  
         if (triggerAction.GetStateDown(handType))
         {
             if (objectInHand)
