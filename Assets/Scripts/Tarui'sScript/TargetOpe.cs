@@ -23,7 +23,13 @@ public class TargetOpe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        child = this.transform.GetChild(0).gameObject;
+        //child = this.transform.GetChild(0).gameObject;
+
+        child = Instantiate(objList[listNum], this.transform.position, Quaternion.identity, this.transform);
+
+        listNum++;
+
+        child.transform.localEulerAngles = new Vector3(0.0f, 90.0f);
     }
 
     // Update is called once per frame

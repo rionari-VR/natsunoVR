@@ -5,7 +5,7 @@ using UnityEngine;
 public class MakeTarget : MonoBehaviour
 {
     [SerializeField]
-    GameObject Prefab = null;
+    List<GameObject> Prefabs = null;
 
     [SerializeField,Header("ターゲットの個数")]
     int Count;
@@ -43,7 +43,7 @@ public class MakeTarget : MonoBehaviour
                 ox = R * Mathf.Cos(Theta * Mathf.Deg2Rad) + x;
                 oz = R * Mathf.Sin(Theta * Mathf.Deg2Rad) + z;
 
-                Instantiate(Prefab, new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta + 180.0f), 0.0f), this.transform);
+                Instantiate(Prefabs[i % 3], new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta + 180.0f), 0.0f), this.transform);
             }
         }
     }
