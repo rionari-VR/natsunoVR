@@ -7,6 +7,9 @@ public class TargetOpe : MonoBehaviour
     [SerializeField]
     List<GameObject> objList;
 
+    [SerializeField,Header("角度がおかしい奴の修正用")]
+    GameObject obj;
+
     GameObject child;
 
     [SerializeField,Range(0.1f,10.0f)]
@@ -43,7 +46,15 @@ public class TargetOpe : MonoBehaviour
                 respornTime = 0.0f;
 
                 // リスポーンの処理
-                child = Instantiate(objList[listNum], this.transform.position + new Vector3(0,-1.0f), Quaternion.identity, this.transform);
+                if(objList[listNum] == obj)
+                {
+                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.Euler(-90.0f, 0, 0), this.transform);
+                }
+                else
+                {
+                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.identity, this.transform);
+
+                }
                 child.AddComponent<RespornOpe>();
                 child.GetComponent<Collider>().enabled = false;
 
