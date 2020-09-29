@@ -7,6 +7,8 @@ TagManager:
   - Gun
   - SpinObj
   - Item
+  - Count
+  - Keihin
   layers:
   - Default
   - TransparentFX

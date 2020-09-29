@@ -33,17 +33,11 @@ public class SpinField : MonoBehaviour
         set
         {
             type = value;
+            typeChange = true;
         }
     }
 
     bool typeChange = false;
-    public bool TypeChange
-    {
-        set
-        {
-            typeChange = value;
-        }
-    }
 
     SpinType oldType;
 
@@ -112,6 +106,7 @@ public class SpinField : MonoBehaviour
 
             if(countDown >= SpinChangeTime)
             {
+                oldType = type;
                 type = SpinType.normal;
             }
         }

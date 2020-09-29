@@ -23,6 +23,9 @@ public class TargetOpe : MonoBehaviour
     [SerializeField]
     int listNum = 0;
 
+    // 落とした景品を計上させるやつ
+    GameObject countObj = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,8 @@ public class TargetOpe : MonoBehaviour
         listNum++;
 
         child.transform.localEulerAngles = new Vector3(0.0f, 90.0f);
+
+        countObj = GameObject.FindGameObjectWithTag("Count");
     }
 
     // Update is called once per frame
@@ -74,6 +79,9 @@ public class TargetOpe : MonoBehaviour
             {
                 this.GetComponent<ItemOpe>().ItemFlg = true;
             }
+
+            // 落とした景品を計上させる
+            countObj.GetComponent<KeihinCount>().GetObj = objList[listNum - 1];
 
             Destroy(child);
 

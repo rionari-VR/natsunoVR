@@ -117,6 +117,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 11706_stuffed_animal_L2 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b3ca82ffad7d0c44a0c6a086b97b6d5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Keihin
+      objectReference: {fileID: 0}
     - target: {fileID: 2040079355311905399, guid: 2b3ca82ffad7d0c44a0c6a086b97b6d5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
