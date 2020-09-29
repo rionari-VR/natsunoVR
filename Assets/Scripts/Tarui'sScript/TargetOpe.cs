@@ -81,7 +81,7 @@ public class TargetOpe : MonoBehaviour
             }
 
             // 落とした景品を計上させる
-            countObj.GetComponent<KeihinCount>().GetObj = objList[listNum - 1];
+            countObj.GetComponent<KeihinCount>().GetObj = objList[listNum];
 
             Destroy(child);
 

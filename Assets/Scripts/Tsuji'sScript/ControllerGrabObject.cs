@@ -28,14 +28,8 @@ public class ControllerGrabObject : MonoBehaviour
             if (collidingObject)
             {
                 //つかむ処理(銃のみ)
-                if (collidingObject.tag == "Gun" && objectInHand == null)
-                {
-                    GrabObject();
-                }
-                else if (objectInHand)
-                {
-                    gunController.SetShootFlag(true);
-                }
+                if (collidingObject.tag == "Gun" && objectInHand == null)   GrabObject();
+                else if (objectInHand)  gunController.SetShootFlag(true);
             }
             else
             {
@@ -112,15 +106,13 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-
+        
         //gunControllerScriptを取得
         gunController = objectInHand.GetComponent<GunController>();
         if (!gunController)
         {
             Debug.Log("null gunController. script name is 'ControllerGrabObject'");
         }
-        //当たり判定の削除
-        objectInHand.GetComponent<BoxCollider>().enabled = false;
         //掴めなかった他GunObjのコンポーネントをoffに。
         for(int i = 0; i < gunModels.Length; i++)
         {
