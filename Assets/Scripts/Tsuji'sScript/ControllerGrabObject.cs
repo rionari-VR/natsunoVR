@@ -13,14 +13,11 @@ public class ControllerGrabObject : MonoBehaviour
     private GameObject collidingObject; // 1
     private GameObject objectInHand; // 2
     private GunController gunController;
+    private GameObject[] gunModels;
 
     void Start()
     {
-        gunController = GameObject.Find("Gun").GetComponent<GunController>();
-        if (!gunController)
-        {
-            Debug.Log("null gunController. script name is 'ControllerGrabObject'");
-        }
+        gunModels = GameObject.FindGameObjectsWithTag("Gun");
     }
     // Update is called once per frame
     void Update()
@@ -31,14 +28,8 @@ public class ControllerGrabObject : MonoBehaviour
             if (collidingObject)
             {
                 //つかむ処理(銃のみ)
-                if (collidingObject.tag == "Gun"　&& objectInHand == null)
-                {
-                    GrabObject();
-                }
-                else if (objectInHand)
-                {
-                    gunController.SetShootFlag();
-                }
+                if (collidingObject.tag == "Gun" && objectInHand == null)   GrabObject();
+                else if (objectInHand)  gunController.SetShootFlag(true);
             }
             else
             {
@@ -46,13 +37,16 @@ public class ControllerGrabObject : MonoBehaviour
             }
         }
 
+        if (grabAction.GetLastStateUp(handType))
+        {
+            if(objectInHand) gunController.SetShootFlag(false);
+        }
+        
         if (triggerAction.GetStateDown(handType))
         {
-            if (objectInHand)
-            {
-                gunController.MagReload();
-            }
+            if (objectInHand) gunController.MagReload();
         }
+
         // 2
         //if (grabAction.GetLastStateUp(handType))
         //{
@@ -112,6 +106,21 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        
+        //gunControllerScriptを取得
+        gunController = objectInHand.GetComponent<GunController>();
+        if (!gunController)
+        {
+            Debug.Log("null gunController. script name is 'ControllerGrabObject'");
+        }
+        //掴めなかった他GunObjのコンポーネントをoffに。
+        for(int i = 0; i < gunModels.Length; i++)
+        {
+            if(gunModels[i].gameObject.name != objectInHand.name)
+            {
+                gunModels[i].SetActive(false);
+            }
+        }
     }
 
     // 3
