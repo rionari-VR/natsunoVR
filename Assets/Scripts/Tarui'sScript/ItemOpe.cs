@@ -23,12 +23,14 @@ public class ItemOpe : MonoBehaviour
     List<GameObject> SpinObject = new List<GameObject>();
 
     GameObject Timer = null;
+    Timer timerSc = null;
 
     private void Awake()
     {
         SpinObject.AddRange(GameObject.FindGameObjectsWithTag("SpinObj"));
 
-        //Timer = GameObject.FindGameObjectWithTag("");
+        Timer = GameObject.FindGameObjectWithTag("Timer");
+        timerSc = Timer.GetComponent<Timer>();
     }
 
     // Start is called before the first frame update
@@ -46,19 +48,19 @@ public class ItemOpe : MonoBehaviour
             {
                 case Item.Time15:
                     {
-
+                        timerSc.nowStatus = Status.plus15s;
                     }
                     break;
 
                 case Item.Time10:
                     {
-
+                        timerSc.nowStatus = Status.plus10s;
                     }
                     break;
 
                 case Item.Time5_SpinDown_Small:
                     {
-
+                        timerSc.nowStatus = Status.slowdown_plus5s;
 
                         SpinChange(SpinField.SpinType.SmallDown);
                     }
@@ -95,7 +97,6 @@ public class ItemOpe : MonoBehaviour
             SpinField spin = SpinObject[i].GetComponent<SpinField>();
 
             spin.spinType = spinType;
-            spin.TypeChange = true;
         }
     }
 }

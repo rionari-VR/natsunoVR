@@ -58,14 +58,17 @@ public class Timer : MonoBehaviour
                break;
            case Status.plus10s:
                timeMax += 10.0f; //+10s
+               nowStatus = Status.normal;
                break;
            case Status.plus15s:
                timeMax += 15.0f; //+15s
-               break;
+               nowStatus = Status.normal;
+                break;
            case Status.slowdown_plus5s:
                timeMax += 5.0f; //+5s
-               //回転をゆっくりする
-               break;
+               nowStatus = Status.normal;
+                //回転をゆっくりする
+                break;
            default:
                break;
        }
