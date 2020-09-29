@@ -16,6 +16,13 @@ public class ItemOpe : MonoBehaviour
     };
 
     Item item = Item.end;
+    public Item itemGet
+    {
+        get
+        {
+            return item;
+        }
+    }
 
     [System.NonSerialized]
     public bool ItemFlg = false;
