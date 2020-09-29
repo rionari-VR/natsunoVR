@@ -64,7 +64,8 @@ MonoBehaviour:
   - {fileID: 2344870364715798070, guid: 650538424badea943804c39b6831bbb1, type: 3}
   - {fileID: 6210963639763498651, guid: 6b6782b24a38dfd45b1adcf581ce8911, type: 3}
   - {fileID: 432988622455209271, guid: cea64bc2a40d75c49ab49300184e83da, type: 3}
-  spornTime: 4.5
+  obj: {fileID: 0}
+  spornTime: 2
   listNum: 0
 --- !u!114 &425456167172454860
 MonoBehaviour:
