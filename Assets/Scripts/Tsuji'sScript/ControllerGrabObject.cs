@@ -113,6 +113,7 @@ public class ControllerGrabObject : MonoBehaviour
         {
             Debug.Log("null gunController. script name is 'ControllerGrabObject'");
         }
+
         //掴めなかった他GunObjのコンポーネントをoffに。
         for(int i = 0; i < gunModels.Length; i++)
         {

@@ -23,7 +23,7 @@ public class itemShow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        item = this.transform.parent.GetComponent<ItemOpe>();
+        item = this.transform.parent.parent.parent.GetComponent<ItemOpe>();
 
         image = this.GetComponent<Image>();
 
