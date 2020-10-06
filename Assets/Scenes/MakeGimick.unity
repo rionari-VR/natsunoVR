@@ -2336,6 +2336,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oyaji
       objectReference: {fileID: 0}
+    - target: {fileID: 4370955732833844547, guid: 637ea756ea642aa4a86da52eb1a2527c,
+        type: 3}
+      propertyPath: clip1
+      value: 
+      objectReference: {fileID: 8300000, guid: e82aaf593af516c418a0a0bf5b98407e, type: 3}
+    - target: {fileID: 4370955732833844547, guid: 637ea756ea642aa4a86da52eb1a2527c,
+        type: 3}
+      propertyPath: clip2
+      value: 
+      objectReference: {fileID: 8300000, guid: da98fafe0433ac8448c234d71b8fd830, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637ea756ea642aa4a86da52eb1a2527c, type: 3}
 --- !u!1001 &797295565886918095
@@ -2412,6 +2422,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6d6256f6ff18924795ee22b2a0f3459, type: 3}
+--- !u!1001 &1343528185133009085
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.178699
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.039357
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.26367188
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823816, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343528186275823822, guid: e59be815bdc8cbe468c1c394836565f3,
+        type: 3}
+      propertyPath: m_Name
+      value: BGMManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e59be815bdc8cbe468c1c394836565f3, type: 3}
 --- !u!1001 &7440566548976552054
 PrefabInstance:
   m_ObjectHideFlags: 0
