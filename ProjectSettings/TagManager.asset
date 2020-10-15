@@ -9,6 +9,8 @@ TagManager:
   - Item
   - Count
   - Keihin
+  - Timer
+  - bullet
   layers:
   - Default
   - TransparentFX

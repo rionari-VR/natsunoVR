@@ -32,9 +32,7 @@ public class TargetOpe : MonoBehaviour
         //child = this.transform.GetChild(0).gameObject;
 
         child = Instantiate(objList[listNum], this.transform.position, Quaternion.identity, this.transform);
-
-        listNum++;
-
+        
         child.transform.localEulerAngles = new Vector3(0.0f, 90.0f);
 
         countObj = GameObject.FindGameObjectWithTag("Count");
@@ -53,11 +51,11 @@ public class TargetOpe : MonoBehaviour
                 // リスポーンの処理
                 if(objList[listNum] == obj)
                 {
-                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.Euler(-90.0f, 0, 0), this.transform);
+                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.Euler(-90.0f, 90.0f, 0), this.transform);
                 }
                 else
                 {
-                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.identity, this.transform);
+                    child = Instantiate(objList[listNum], this.transform.position + new Vector3(0, -1.0f), Quaternion.Euler(0.0f, 90.0f, 0), this.transform);
 
                 }
                 child.AddComponent<RespornOpe>();
