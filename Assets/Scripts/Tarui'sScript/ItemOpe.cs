@@ -32,17 +32,14 @@ public class ItemOpe : MonoBehaviour
     GameObject Timer = null;
     Timer timerSc = null;
 
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
         SpinObject.AddRange(GameObject.FindGameObjectsWithTag("SpinObj"));
 
         Timer = GameObject.FindGameObjectWithTag("Timer");
         timerSc = Timer.GetComponent<Timer>();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         item = (Item)Random.Range(0, 4);
     }
 
