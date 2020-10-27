@@ -11,6 +11,7 @@ TagManager:
   - Keihin
   - Timer
   - bullet
+  - Food
   layers:
   - Default
   - TransparentFX
