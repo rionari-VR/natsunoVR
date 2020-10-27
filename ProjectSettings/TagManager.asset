@@ -11,6 +11,7 @@ TagManager:
   - Keihin
   - Timer
   - bullet
+  - Laser
   layers:
   - Default
   - TransparentFX
