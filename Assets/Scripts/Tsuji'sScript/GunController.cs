@@ -8,85 +8,99 @@ public class GunController : MonoBehaviour
     {
         HandGun,
         MachineGun,
-        Magnum
+        Beam
     }
 
-    [SerializeField] private GunType gunType = GunType.HandGun;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject magnumBulletPrefab;
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private int magMax = 30;
+    [SerializeField] private GunType gunType = GunType.HandGun;     //銃のタイプ
+    [SerializeField] private GameObject bulletPrefab;               //銃の弾丸
+    [SerializeField] private GameObject beamBulletPrefab;           //ビーム銃用の弾丸(いらなさそうなら消せる)
+    [SerializeField] private float bulletSpeed;                     //弾速
+    [SerializeField] private int magMax = 30;                       //弾の最大値
+    [SerializeField] private float scaleChange;                     //サイズを変える値
 
-    private int  interval;
-    [SerializeField] private int  mag;
-    private bool isShoot;
+    [SerializeField] private int mag;                               //現在の総弾数
+    private int  interval;                                          //弾を放つ間隔
+    private bool isShoot;                                           //銃を撃ったかどうかのフラグ
+    private GameObject bulletObj;                                   //銃prefab生成用
+    private Vector3 beambulletScale;                                //ビーム銃用弾丸のサイズ
+
 
     void Start()
     {
         mag = magMax;
         interval = 0;
         isShoot = false;
+        beambulletScale = Vector3.zero;
+        
     }
     // Update is called once per frame
     void Update()
     {
         //VRでtestするときはコメントアウトしてください
-        //switch (gunType)
-        //{
-        //    case GunType.HandGun:
-        //        if (Input.GetKeyDown(KeyCode.Z))
-        //        {
-        //            HandGunBullet();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //    case GunType.MachineGun:
-        //        if (Input.GetKey(KeyCode.Z))
-        //        {
-        //            MachineGunBullet();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //    case GunType.Magnum:
-        //        if (Input.GetKey(KeyCode.Z))
-        //        {
-        //            MagnumBullet();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //}
-        //VRでtestするときはオンにしてください
         switch (gunType)
         {
             case GunType.HandGun:
-                 if (isShoot)
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    isShoot = false;
                     HandGunBullet();
+                }
+                else if (Input.GetKey(KeyCode.X))
+                {
+                    mag = magMax;
                 }
                 break;
             case GunType.MachineGun:
-                if (isShoot)
+                if (Input.GetKey(KeyCode.Z))
                 {
                     MachineGunBullet();
                 }
-                break;
-            case GunType.Magnum:
-                if (isShoot)
+                else if (Input.GetKey(KeyCode.X))
                 {
-                    MagnumBullet();
+                    mag = magMax;
+                }
+                break;
+            case GunType.Beam:
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    BeamBulletCharge();
+                }
+                else if (Input.GetKeyUp(KeyCode.Z))
+                {
+                    BeamBulletFiring();
+                }
+                else if (Input.GetKey(KeyCode.X))
+                {
+                    mag = magMax;
                 }
                 break;
         }
+        //VRでtestするときはオンにしてください
+        //switch (gunType)
+        //{
+        //    case GunType.HandGun:
+        //         if (isShoot)
+        //        {
+        //            isShoot = false;
+        //            HandGunBullet();
+        //        }
+        //        break;
+        //    case GunType.MachineGun:
+        //        if (isShoot)
+        //        {
+        //            MachineGunBullet();
+        //        }
+        //        break;
+        //    case GunType.Beam:
+        //        if (isShoot)
+        //        {
+        //            BeamBulletCharge();
+        //        }
+        //        else
+        //        {
+        //            BeamBulletFiring();
+        //        }
+        //        break;
+        //}
     }
 
     //ハンドガン
@@ -95,7 +109,7 @@ public class GunController : MonoBehaviour
         if(mag > 0)
         {
             mag--;
-            GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
             bulletRb.AddForce(transform.forward * bulletSpeed);
             Destroy(bulletObj, 3.0f);
@@ -109,7 +123,7 @@ public class GunController : MonoBehaviour
         if(interval % 5 == 0 && mag > 0)
         {
             mag--;
-            GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
             bulletRb.AddForce(transform.forward * bulletSpeed);
             Destroy(bulletObj, 3.0f);
@@ -117,26 +131,38 @@ public class GunController : MonoBehaviour
         }
     }
 
-    //マグナム
-    void MagnumBullet()
+    //ビーム
+    void BeamBulletCharge()
     {
-        interval++;
-        if (interval % 100 == 0 && mag > 0)
+        if (mag > 0)
+        {
+            if (bulletObj == null)
+            {
+                bulletObj = Instantiate(beamBulletPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                bulletObj.transform.localScale = new Vector3(beambulletScale.x += scaleChange,
+                                                             beambulletScale.y += scaleChange,
+                                                             beambulletScale.z += scaleChange);
+            }
+        }
+    }
+
+    //発射
+    void BeamBulletFiring()
+    {     
+        if (bulletObj != null)
         {
             mag--;
-            GameObject bulletObj = Instantiate(magnumBulletPrefab, transform.position, Quaternion.identity);
             Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
             bulletRb.AddForce(transform.forward * bulletSpeed);
             Destroy(bulletObj, 3.0f);
-            interval = 0;
+            beambulletScale = Vector3.zero;
         }
     }
 
-    public void SetShootFlag(bool flg)
-    {
-        isShoot = flg;
-    }
-
+    //リロード関数
     public void MagReload()
     {
         if(mag <= 0)
@@ -145,4 +171,11 @@ public class GunController : MonoBehaviour
             mag = magMax;
         }
     }
+
+    //setter
+    public void SetShootFlag(bool flg)
+    {
+        isShoot = flg;
+    }
+    
 }

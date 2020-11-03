@@ -78,9 +78,6 @@ public class ControllerGrabObject : MonoBehaviour
                 ReleaseObject();
             }
         }
-
-        Debug.Log(objectInHand);
-
     }
 
     //コントローラーオブジェクトに当たっているオブジェクトは掴める
