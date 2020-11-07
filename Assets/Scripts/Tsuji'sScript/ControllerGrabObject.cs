@@ -5,16 +5,22 @@ using Valve.VR;
 
 public class ControllerGrabObject : MonoBehaviour
 {
-    [SerializeField] private SteamVR_Input_Sources  handType;
-    [SerializeField] private SteamVR_Behaviour_Pose controllerPose;
+    [SerializeField] private SteamVR_Input_Sources  handType;           //オブジェクトの属性(左手or右手)
+    [SerializeField] private SteamVR_Behaviour_Pose controllerPose;     
     [SerializeField] private SteamVR_Action_Boolean grabAction;
     [SerializeField] private SteamVR_Action_Boolean triggerAction;
+
     [SerializeField] private GameObject collidingObject; // 1
+    [SerializeField] private GameObject handModel;
+    [SerializeField] private AnimationClip handAnimClip;
 
     private GameObject    objectInHand; // 2
-    private GunController gunController;
     private GameObject[]  gunModels;
+    private Animator      handAnimator;
+    private GunController gunController;
 
+    private float animationStartTime;
+    private bool isAnimationFlag;
     private string tagGun;
     private string tagFood;
 
@@ -23,10 +29,18 @@ public class ControllerGrabObject : MonoBehaviour
         gunModels = GameObject.FindGameObjectsWithTag("Gun");
         tagGun = "Gun";
         tagFood = "Food";
+
+        handAnimator = handModel.GetComponent<Animator>();
+        handAnimator.enabled = false;
+        animationStartTime = 0.5f;
+        isAnimationFlag = false;
     }
     // Update is called once per frame
     void Update()
     {
+        //handanimation
+        HandAnimationManagement(Input.GetKeyDown(KeyCode.D), Input.GetKeyDown(KeyCode.S));
+
         // 1
         if (grabAction.GetLastStateDown(handType))
         {
@@ -180,6 +194,42 @@ public class ControllerGrabObject : MonoBehaviour
         }
         // 4
         objectInHand = null;
+    }
+
+    //アニメーション管理関数
+    private void HandAnimationManagement(bool push,bool release)
+    {
+        //再生がおわれば再度再生可能にする
+        if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            handAnimator.enabled = false;
+        }
+
+        if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animationStartTime
+            && isAnimationFlag)
+        {
+            animationStartTime = handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            handAnimator.enabled = false;
+            isAnimationFlag = false;
+        }
+
+        //離すアニメーション
+        if (push)
+        {
+            if (handAnimator.enabled) return;
+
+            handAnimator.enabled = true;
+            isAnimationFlag = true;
+            handAnimator.Play(handAnimClip.name, 0, 0);
+        }
+        //握るアニメーション
+        if (release)
+        {
+            if (handAnimator.enabled) return;
+
+            handAnimator.enabled = true;
+            handAnimator.Play(handAnimClip.name, 0, animationStartTime);
+        }
     }
 
     //Getter
