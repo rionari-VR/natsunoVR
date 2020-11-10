@@ -16,6 +16,9 @@ public class MakeTarget : MonoBehaviour
     [SerializeField]
     float Y;
 
+    [SerializeField]
+    bool IOFlg = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +46,14 @@ public class MakeTarget : MonoBehaviour
                 ox = R * Mathf.Cos(Theta * Mathf.Deg2Rad) + x;
                 oz = R * Mathf.Sin(Theta * Mathf.Deg2Rad) + z;
 
-                Instantiate(Prefabs[i % 3], new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta + 180.0f), 0.0f), this.transform);
+                if (IOFlg)
+                {
+                    Instantiate(Prefabs[i % 3], new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta), 0.0f), this.transform);
+                }
+                else
+                {
+                    Instantiate(Prefabs[i % 3], new Vector3(ox, y, oz), Quaternion.Euler(0.0f, -(Theta + 180.0f), 0.0f), this.transform);
+                }
             }
         }
     }
