@@ -34,33 +34,39 @@ public class ControllerGrabObject : MonoBehaviour
         handAnimator.enabled = false;
         animationStartTime = 0.5f;
         isAnimationFlag = false;
+
+        handAnimator.enabled = true;
+        isAnimationFlag = true;
+        handAnimator.Play(handAnimClip.name, 0, 0);
+
+        handAnimator.speed = 3;
     }
     // Update is called once per frame
     void Update()
     {
         //handanimation
-        HandAnimationManagement(Input.GetKeyDown(KeyCode.D), Input.GetKeyDown(KeyCode.S));
+        HandAnimationManagement(objectInHand, grabAction.GetLastStateUp(handType), grabAction.GetLastStateDown(handType));
 
         // 1
         if (grabAction.GetLastStateDown(handType))
         {
             if (collidingObject)
             {
-                //つかむ処理 : 銃
-                if (collidingObject.tag == tagGun && objectInHand == null)
-                {
-                    GrabGunObject();
-                }
-                else if (objectInHand)
-                {
-                    if(objectInHand.tag == tagGun)
-                      gunController.SetShootFlag(true);
-                }
                 //食べ物
-                if(collidingObject.tag == tagFood && objectInHand == null)
+                if (collidingObject.tag == tagFood && objectInHand == null)
                 {
                     GrabFoodObject();
                 }
+                //つかむ処理 : 銃
+                else if (collidingObject.tag == tagGun && objectInHand == null)
+                {
+                    GrabGunObject();
+                }
+                else if (objectInHand.tag == tagGun && objectInHand)
+                {
+                    gunController.SetShootFlag(true);
+                }
+               
             }
         }
 
@@ -197,38 +203,41 @@ public class ControllerGrabObject : MonoBehaviour
     }
 
     //アニメーション管理関数
-    private void HandAnimationManagement(bool push,bool release)
+    private void HandAnimationManagement(GameObject grabObj, bool push,bool release)
     {
-        //再生がおわれば再度再生可能にする
-        if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (grabObj == null)
         {
-            handAnimator.enabled = false;
-        }
+            //再生がおわれば再度再生可能にする
+            if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                handAnimator.enabled = false;
+            }
 
-        if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animationStartTime
-            && isAnimationFlag)
-        {
-            animationStartTime = handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            handAnimator.enabled = false;
-            isAnimationFlag = false;
-        }
+            if (handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animationStartTime
+                && isAnimationFlag)
+            {
+                animationStartTime = handAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                handAnimator.enabled = false;
+                isAnimationFlag = false;
+            }
 
-        //離すアニメーション
-        if (push)
-        {
-            if (handAnimator.enabled) return;
+            //離すアニメーション
+            if (push)
+            {
+                if (handAnimator.enabled) return;
 
-            handAnimator.enabled = true;
-            isAnimationFlag = true;
-            handAnimator.Play(handAnimClip.name, 0, 0);
-        }
-        //握るアニメーション
-        if (release)
-        {
-            if (handAnimator.enabled) return;
+                handAnimator.enabled = true;
+                isAnimationFlag = true;
+                handAnimator.Play(handAnimClip.name, 0, 0);
+            }
+            //握るアニメーション
+            if (release)
+            {
+                if (handAnimator.enabled) return;
 
-            handAnimator.enabled = true;
-            handAnimator.Play(handAnimClip.name, 0, animationStartTime);
+                handAnimator.enabled = true;
+                handAnimator.Play(handAnimClip.name, 0, animationStartTime);
+            }
         }
     }
 
