@@ -502,6 +502,11 @@ PrefabInstance:
       propertyPath: R
       value: 3.25
       objectReference: {fileID: 0}
+    - target: {fileID: 346519237996405358, guid: cb53b31dd9577ac40b5c65977b537d69,
+        type: 3}
+      propertyPath: IOFlg
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7440566549757150416, guid: cb53b31dd9577ac40b5c65977b537d69,
         type: 3}
       propertyPath: m_Mesh
