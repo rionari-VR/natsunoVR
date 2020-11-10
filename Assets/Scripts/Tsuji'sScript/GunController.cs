@@ -17,6 +17,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private float bulletSpeed;                     //弾速
     [SerializeField] private int magMax = 30;                       //弾の最大値
     [SerializeField] private float scaleChange;                     //サイズを変える値
+    [SerializeField] private float scaleMax;                        //サイズの最大値
 
     [SerializeField] private int mag;                               //現在の総弾数
     private int  interval;                                          //弾を放つ間隔
@@ -24,83 +25,81 @@ public class GunController : MonoBehaviour
     private GameObject bulletObj;                                   //銃prefab生成用
     private Vector3 beambulletScale;                                //ビーム銃用弾丸のサイズ
 
-
     void Start()
     {
         mag = magMax;
         interval = 0;
         isShoot = false;
         beambulletScale = Vector3.zero;
-        
     }
     // Update is called once per frame
     void Update()
     {
         //VRでtestするときはコメントアウトしてください
-        switch (gunType)
-        {
-            case GunType.HandGun:
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    HandGunBullet();
-                }
-                else if (Input.GetKey(KeyCode.X))
-                {
-                    mag = magMax;
-                }
-                break;
-            case GunType.MachineGun:
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    MachineGunBullet();
-                }
-                else if (Input.GetKey(KeyCode.X))
-                {
-                    mag = magMax;
-                }
-                break;
-            case GunType.Beam:
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    BeamBulletCharge();
-                }
-                else if (Input.GetKeyUp(KeyCode.Z))
-                {
-                    BeamBulletFiring();
-                }
-                else if (Input.GetKey(KeyCode.X))
-                {
-                    mag = magMax;
-                }
-                break;
-        }
-        //VRでtestするときはオンにしてください
         //switch (gunType)
         //{
         //    case GunType.HandGun:
-        //         if (isShoot)
+        //        if (Input.GetKeyDown(KeyCode.Z))
         //        {
-        //            isShoot = false;
         //            HandGunBullet();
+        //        }
+        //        else if (Input.GetKey(KeyCode.X))
+        //        {
+        //            mag = magMax;
         //        }
         //        break;
         //    case GunType.MachineGun:
-        //        if (isShoot)
+        //        if (Input.GetKey(KeyCode.Z))
         //        {
         //            MachineGunBullet();
         //        }
+        //        else if (Input.GetKey(KeyCode.X))
+        //        {
+        //            mag = magMax;
+        //        }
         //        break;
         //    case GunType.Beam:
-        //        if (isShoot)
+        //        if (Input.GetKey(KeyCode.Z))
         //        {
         //            BeamBulletCharge();
         //        }
-        //        else
+        //        else if (Input.GetKeyUp(KeyCode.Z))
         //        {
         //            BeamBulletFiring();
         //        }
+        //        else if (Input.GetKey(KeyCode.X))
+        //        {
+        //            mag = magMax;
+        //        }
         //        break;
         //}
+        //VRでtestするときはオンにしてください
+        switch (gunType)
+        {
+            case GunType.HandGun:
+                if (isShoot)
+                {
+                    isShoot = false;
+                    HandGunBullet();
+                }
+                break;
+            case GunType.MachineGun:
+                if (isShoot)
+                {
+                    MachineGunBullet();
+                }
+                break;
+            case GunType.Beam:
+                if (isShoot)
+                {
+                    BeamBulletCharge();
+                }
+                else
+                {
+                    BeamBulletFiring();
+                }
+                break;
+        }
     }
 
     //ハンドガン
@@ -134,17 +133,31 @@ public class GunController : MonoBehaviour
     //ビーム
     void BeamBulletCharge()
     {
+        //総弾数がゼロでなく
         if (mag > 0)
         {
+            //bulletObjがnullだったら
             if (bulletObj == null)
             {
-                bulletObj = Instantiate(beamBulletPrefab, transform.position, Quaternion.identity);
+                Vector3 pos = transform.position;
+                
+                bulletObj = Instantiate(beamBulletPrefab, pos, Quaternion.identity);
             }
             else
             {
-                bulletObj.transform.localScale = new Vector3(beambulletScale.x += scaleChange,
-                                                             beambulletScale.y += scaleChange,
-                                                             beambulletScale.z += scaleChange);
+                //ポジションの動機
+                var pos = transform.position;
+               
+                bulletObj.transform.position = pos;
+                //スケール操作
+                if (beambulletScale.x < scaleMax)
+                {
+
+                    bulletObj.transform.localScale = new Vector3(beambulletScale.x += scaleChange,
+                                                                 beambulletScale.y += scaleChange,
+                                                                 beambulletScale.z += scaleChange);
+                }
+
             }
         }
     }
