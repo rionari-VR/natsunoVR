@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5904300963922398860}
   - component: {fileID: 2767221951025763185}
   m_Layer: 0
-  m_Name: MagnumGun
+  m_Name: BeamGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,10 +49,11 @@ MonoBehaviour:
   gunType: 2
   bulletPrefab: {fileID: 4867713385448205808, guid: bdfd6993d7a4bc7488317fd7145da28b,
     type: 3}
-  magnumBulletPrefab: {fileID: 3982293452390978780, guid: 5803c6e71813f794a9b9dc9bee685b55,
-    type: 3}
+  beamBulletPrefab: {fileID: 0}
   bulletSpeed: 1000
   magMax: 30
+  scaleChange: 0
+  scaleMax: 0
   mag: 0
 --- !u!65 &5904300963922398860
 BoxCollider:
@@ -66,7 +67,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.25, z: 0.5}
-  m_Center: {x: 0, y: -0.07, z: -0.25}
+  m_Center: {x: 0, y: -0.07, z: -0.55}
 --- !u!54 &2767221951025763185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -103,7 +104,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2e97debdd2e21e449a280703ac8b9fa8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e97debdd2e21e449a280703ac8b9fa8,
         type: 3}
