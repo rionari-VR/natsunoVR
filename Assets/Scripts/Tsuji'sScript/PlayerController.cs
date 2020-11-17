@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SteamVR_Input input;
     [SerializeField] private Camera camera;
     [SerializeField] private int moveSpeedLimits;
+    [SerializeField] private int eatTime;
 
     private ControllerGrabObject leftGrabScript;
     private ControllerGrabObject rightGrabScript;
@@ -47,9 +48,19 @@ public class PlayerController : MonoBehaviour
         foodObj1 = leftGrabScript.GetInHandObject();
         foodObj2 = rightGrabScript.GetInHandObject();
 
-        if(!foodObj1 || !foodObj2)
+        if(foodObj1)
         {
-            FoodEat();
+            if (foodObj1.tag == "Food")
+            {
+                FoodEat();
+            }
+
+        }else if (foodObj2)
+        {
+            if (foodObj2.tag == "Food")
+            {
+                FoodEat();
+            }
         }
 
     }
@@ -78,8 +89,11 @@ public class PlayerController : MonoBehaviour
     {
         if (ccc.GetEatFlag())
         {
-            if (foodObj1) Destroy(foodObj1);
-            if (foodObj2) Destroy(foodObj2);
+            if(eatTime < ccc.GetTimeToEat())
+            {
+                if (foodObj1) Destroy(foodObj1);
+                if (foodObj2) Destroy(foodObj2);
+            }
         }
     }
 }
