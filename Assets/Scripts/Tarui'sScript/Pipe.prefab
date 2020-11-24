@@ -15062,6 +15062,7 @@ MonoBehaviour:
   Count: 10
   R: 4.5
   Y: 1
+  IOFlg: 0
 --- !u!114 &70429649258030666
 MonoBehaviour:
   m_ObjectHideFlags: 0
