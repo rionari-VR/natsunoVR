@@ -56,7 +56,7 @@ namespace NaughtyWaterBuoyancy
             if (boxCollider != null)
             {
                 Vector3 center = boxCollider.center;
-                //center.y = boxCollider.size.y / -2f;
+                center.y = boxCollider.size.y / -2f;
                 center.y += (this.height + this.noiseStrength) / this.transform.localScale.y;
 
                 boxCollider.center = center;

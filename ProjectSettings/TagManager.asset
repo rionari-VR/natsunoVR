@@ -12,6 +12,8 @@ TagManager:
   - Timer
   - bullet
   - Food
+  - Water Volume
+  - Ball
   layers:
   - Default
   - TransparentFX
