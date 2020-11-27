@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi.AudioManager;
 
 public class GunController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private int mag;                               //現在の総弾数
     private int  interval;                                          //弾を放つ間隔
     private bool isShoot;                                           //銃を撃ったかどうかのフラグ
+    private bool isBeamBullet;                                      //ビーム銃管理フラグ
     private GameObject bulletObj;                                   //銃prefab生成用
     private Vector3 beambulletScale;                                //ビーム銃用弾丸のサイズ
 
@@ -30,6 +32,7 @@ public class GunController : MonoBehaviour
         mag = magMax;
         interval = 0;
         isShoot = false;
+        isBeamBullet = false;
         beambulletScale = Vector3.zero;
     }
     // Update is called once per frame
@@ -108,10 +111,10 @@ public class GunController : MonoBehaviour
         if(mag > 0)
         {
             mag--;
-            bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
+            GameObject r_bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody bulletRb = r_bulletObj.GetComponent<Rigidbody>();
             bulletRb.AddForce(transform.forward * bulletSpeed);
-            Destroy(bulletObj, 3.0f);
+            Destroy(r_bulletObj, 3.0f);
         }
     }
 
@@ -122,10 +125,10 @@ public class GunController : MonoBehaviour
         if(interval % 5 == 0 && mag > 0)
         {
             mag--;
-            bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
+            GameObject r_bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody bulletRb = r_bulletObj.GetComponent<Rigidbody>();
             bulletRb.AddForce(transform.forward * bulletSpeed);
-            Destroy(bulletObj, 3.0f);
+            Destroy(r_bulletObj, 3.0f);
             interval = 0;
         }
     }
@@ -136,28 +139,21 @@ public class GunController : MonoBehaviour
         //総弾数がゼロでなく
         if (mag > 0)
         {
-            //bulletObjがnullだったら
-            if (bulletObj == null)
+            Vector3 pos = transform.position;
+            if (!isBeamBullet)
             {
-                Vector3 pos = transform.position;
-                
+                isBeamBullet = true;
+                SEManager.Instance.Play(SEPath.BEAMGUNCHARGE1);
                 bulletObj = Instantiate(beamBulletPrefab, pos, Quaternion.identity);
             }
-            else
+            //ポジションの動機
+            bulletObj.transform.position = pos;
+            //スケール操作
+            if (beambulletScale.x <= scaleMax)
             {
-                //ポジションの動機
-                var pos = transform.position;
-               
-                bulletObj.transform.position = pos;
-                //スケール操作
-                if (beambulletScale.x < scaleMax)
-                {
-
-                    bulletObj.transform.localScale = new Vector3(beambulletScale.x += scaleChange,
-                                                                 beambulletScale.y += scaleChange,
-                                                                 beambulletScale.z += scaleChange);
-                }
-
+                bulletObj.transform.localScale = new Vector3(beambulletScale.x += scaleChange,
+                                                             beambulletScale.y += scaleChange,
+                                                             beambulletScale.z += scaleChange);
             }
         }
     }
@@ -167,11 +163,21 @@ public class GunController : MonoBehaviour
     {     
         if (bulletObj != null)
         {
-            mag--;
-            Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
-            bulletRb.AddForce(transform.forward * bulletSpeed);
-            Destroy(bulletObj, 3.0f);
+            if (isBeamBullet)
+            {
+                isBeamBullet = false;
+                SEManager.Instance.Stop(SEPath.BEAMGUNCHARGE1);
+                SEManager.Instance.Play(SEPath.BEAMGUN1);
+                mag--;
+            }
+            GameObject r_bulletObj = Instantiate(beamBulletPrefab, bulletObj.transform.position, Quaternion.identity);
+            Rigidbody bulletRb = r_bulletObj.GetComponent<Rigidbody>();
+
+            r_bulletObj.transform.localScale = beambulletScale;
             beambulletScale = Vector3.zero;
+            bulletRb.AddForce(gameObject.transform.forward * bulletSpeed);
+            Destroy(bulletObj);
+            Destroy(r_bulletObj, 3.0f);
         }
     }
 
