@@ -6,7 +6,8 @@ using Valve.VR;
 
 public class SceneLoad : MonoBehaviour
 {
-    public SteamVR_Input_Sources handType;
+    public SteamVR_Input_Sources LefthandType;
+    public SteamVR_Input_Sources RighthandType;
     public SteamVR_Action_Boolean triggerAction;
     public bool SceneTrigger;
     // Start is called before the first frame update
@@ -26,10 +27,18 @@ public class SceneLoad : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void LoadTrigger(string name)
+    public void LoadLeftTrigger(string name)
     {
         Debug.Log("シーン遷移準備完了");
-        if (SceneTrigger||triggerAction.GetLastStateDown(handType))
+        if (SceneTrigger || triggerAction.GetLastStateDown(LefthandType))
+        {
+            LoadScene(name);
+        }
+    }
+    public void LoadRightTrigger(string name)
+    {
+        Debug.Log("シーン遷移準備完了");
+        if (SceneTrigger || triggerAction.GetLastStateDown(RighthandType))
         {
             LoadScene(name);
         }
