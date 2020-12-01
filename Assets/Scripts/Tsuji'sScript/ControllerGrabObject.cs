@@ -23,12 +23,14 @@ public class ControllerGrabObject : MonoBehaviour
     private bool isAnimationFlag;
     private string tagGun;
     private string tagFood;
+    private string tagPoi;
 
     void Start()
     {
         gunModels = GameObject.FindGameObjectsWithTag("Gun");
         tagGun = "Gun";
         tagFood = "Food";
+        tagPoi = "Poi";
 
         handAnimator = handModel.GetComponent<Animator>();
         handAnimator.enabled = false;
@@ -52,10 +54,10 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if (collidingObject)
             {
-                //食べ物
-                if (collidingObject.tag == tagFood && objectInHand == null)
+                //つかむ処理 :食べ物 & poi
+                if ((collidingObject.tag == tagFood || collidingObject.tag == tagPoi) && objectInHand == null)
                 {
-                    GrabFoodObject();
+                    GrabObject();
                 }
                 //つかむ処理 : 銃
                 else if (collidingObject.tag == tagGun && objectInHand == null)
@@ -165,8 +167,8 @@ public class ControllerGrabObject : MonoBehaviour
         }
     }
 
-    //掴む処理(食べ物)
-    private void GrabFoodObject()
+    //掴む処理
+    private void GrabObject()
     {
         // 1
         objectInHand = collidingObject;

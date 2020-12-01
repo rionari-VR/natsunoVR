@@ -14,6 +14,8 @@ TagManager:
   - Food
   - Water Volume
   - Ball
+  - Laser
+  - Poi
   layers:
   - Default
   - TransparentFX
