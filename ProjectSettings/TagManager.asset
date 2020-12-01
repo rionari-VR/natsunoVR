@@ -12,6 +12,8 @@ TagManager:
   - Timer
   - bullet
   - Food
+  - Laser
+  - UI
   layers:
   - Default
   - TransparentFX
