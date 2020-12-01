@@ -39,43 +39,43 @@ public class GunController : MonoBehaviour
     void Update()
     {
         //VRでtestするときはコメントアウトしてください
-        //switch (gunType)
-        //{
-        //    case GunType.HandGun:
-        //        if (Input.GetKeyDown(KeyCode.Z))
-        //        {
-        //            HandGunBullet();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //    case GunType.MachineGun:
-        //        if (Input.GetKey(KeyCode.Z))
-        //        {
-        //            MachineGunBullet();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //    case GunType.Beam:
-        //        if (Input.GetKey(KeyCode.Z))
-        //        {
-        //            BeamBulletCharge();
-        //        }
-        //        else if (Input.GetKeyUp(KeyCode.Z))
-        //        {
-        //            BeamBulletFiring();
-        //        }
-        //        else if (Input.GetKey(KeyCode.X))
-        //        {
-        //            mag = magMax;
-        //        }
-        //        break;
-        //}
+        switch (gunType)
+        {
+            case GunType.HandGun:
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    HandGunBullet();
+                }
+                else if (Input.GetKey(KeyCode.X))
+                {
+                    mag = magMax;
+                }
+                break;
+            case GunType.MachineGun:
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    MachineGunBullet();
+                }
+                else if (Input.GetKey(KeyCode.X))
+                {
+                    mag = magMax;
+                }
+                break;
+            case GunType.Beam:
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    BeamBulletCharge();
+                }
+                else if (Input.GetKeyUp(KeyCode.Z))
+                {
+                    BeamBulletFiring();
+                }
+                else if (Input.GetKey(KeyCode.X))
+                {
+                    mag = magMax;
+                }
+                break;
+        }
         //VRでtestするときはオンにしてください
         switch (gunType)
         {
@@ -127,6 +127,7 @@ public class GunController : MonoBehaviour
             mag--;
             GameObject r_bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody bulletRb = r_bulletObj.GetComponent<Rigidbody>();
+            SEManager.Instance.Play(SEPath.HANDGUNFIRING1);
             bulletRb.AddForce(transform.forward * bulletSpeed);
             Destroy(r_bulletObj, 3.0f);
             interval = 0;
