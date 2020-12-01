@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bulletCollider : MonoBehaviour
+public class BulletColliderComponent : MonoBehaviour
 {
    // [SerializeField] private AudioClip bulletSE;
   //  private AudioSource audioSource;

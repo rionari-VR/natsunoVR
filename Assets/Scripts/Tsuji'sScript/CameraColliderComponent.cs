@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraCollderComponent : MonoBehaviour
+public class CameraColliderComponent : MonoBehaviour
 {
     //食べ物にカメラが当たったかどうか
     private bool isEatFlag;
