@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class WaterUp : MonoBehaviour
 {
-    [SerializeField,Header("水の浮力")]
-    Vector3 UpPower = Vector3.zero;
+    [SerializeField,Header("水の流れ")]
+    Vector3 WavePower = Vector3.zero;
+
+    private void Awake()
+    {
+        WavePower *= 0.01f;
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Rigidbody>())
+        if (other.tag == "Ball")
         {
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-
-            rb.velocity += UpPower;
-            
+            //other.transform.position += WavePower;
+            other.GetComponent<Rigidbody>().velocity += WavePower * this.transform.lossyScale.x;
         }
     }
 }
