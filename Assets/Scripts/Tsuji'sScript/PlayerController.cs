@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using KanKikuchi.AudioManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private ControllerGrabObject leftGrabScript;
     private ControllerGrabObject rightGrabScript;
-    private CameraCollderComponent ccc;
+    private CameraColliderComponent ccc;
 
     private GameObject leftHand;
     private GameObject rightHand;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
         leftGrabScript = leftHand.GetComponent<ControllerGrabObject>();
         rightGrabScript = rightHand.GetComponent<ControllerGrabObject>();
 
-        ccc = camera.GetComponent<CameraCollderComponent>();
+        ccc = camera.GetComponent<CameraColliderComponent>();
 
         trackPad = SteamVR_Actions.default_TrackPad;
 
@@ -55,7 +56,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         pos = trackPad.GetLastAxis(leftHandType);
-
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    pos = new Vector2(1.0f, 1.0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    pos = new Vector2(-1.0f, -1.0f);
+        //}
         PayerMove();
 
         foodObj1 = leftGrabScript.GetInHandObject();
@@ -91,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
             if (!isButtonDown)
             {
+                SEManager.Instance.Play(SEPath.ASIOTO01);
                 isButtonDown = true;
                 startPos.y = 0.0f;
             }
@@ -105,6 +114,7 @@ public class PlayerController : MonoBehaviour
 
             if (!isButtonDown)
             {
+                SEManager.Instance.Play(SEPath.ASIOTO01);
                 isButtonDown = true;
                 startPos.y = 0.0f;
             }
