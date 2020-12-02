@@ -9,12 +9,18 @@ public class HitButton : MonoBehaviour
     public SceneLoad sceneload;
     public string NextSceneName;
     bool HitTrigger;
+    bool RightTrigger;
+    bool LeftTrigger;
     // Start is called before the first frame update
     void Start()
     {
         sceneload = GameObject.Find("SceneManager").GetComponent<SceneLoad>();
         HitTime = GetComponent<Slider>();
         HitTime.value = 0;
+        HitTrigger = false;
+    }
+    void FixedUpdate()
+    {
         HitTrigger = false;
     }
 
@@ -24,14 +30,43 @@ public class HitButton : MonoBehaviour
         if (!HitTrigger)
         {
             HitTime.value -= 0.1f;
+            LeftTrigger = false;
+            RightTrigger = false;
+
+            if (HitTime.value < 0)
+            {
+                HitTime.value = 0;
+            }
         }
-        else if (HitTime.value >= 1.0f){
-            sceneload.LoadTrigger(NextSceneName);
+        else
+        {
+            HitTime.value += 0.1f;
+
+            if (HitTime.value >= 1.0f)
+            {
+                if (LeftTrigger)
+                {
+                    sceneload.LoadLeftTrigger(NextSceneName);
+                }
+                else if (RightTrigger)
+                {
+                    sceneload.LoadRightTrigger(NextSceneName);
+                }
+            }
         }
     }
     public void FinishVal()
     {
         Debug.Log("Finish");
+    }
+
+    public void IsHitLeftTrigger(bool trigger)
+    {
+        LeftTrigger = trigger;
+    }
+    public void IsHitRightTrigger(bool trigger)
+    {
+        RightTrigger = trigger;
     }
     void OnTriggerStay(Collider other)
     {
@@ -44,11 +79,11 @@ public class HitButton : MonoBehaviour
             HitTime.value += 0.1f;
         }
     }
-    void OnTriggerExit(Collider other)
-    {
-        Debug.Log("離れた");
-        HitTrigger = false;
+    //void OnTriggerExit(Collider other)
+    //{
+    //    Debug.Log("離れた");
+    //    HitTrigger = false;
 
 
-    }
+    //}
 }
