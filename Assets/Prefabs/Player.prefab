@@ -51,7 +51,11 @@ MonoBehaviour:
     actionPath: /actions/default/in/TrackPad
     needsReinit: 0
   camera: {fileID: 8039174663569137139}
-  moveSpeedLimits: 0
+  moveSpeedLimits: 20
+  eatTime: 5
+  jumpPow: 5
+  mass: 0.5
+  gravity: {x: 0, y: -0.5, z: 0}
 --- !u!1 &8835826144746397984
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +268,13 @@ PrefabInstance:
         type: 3}
       propertyPath: handModel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5607465285056700530}
+    - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: handAnimClip
+      value: 
+      objectReference: {fileID: 4781951162920444690, guid: 0fbf22b5b850be34ba05089748ff09da,
+        type: 3}
     - target: {fileID: 952066435489744963, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_Enabled
@@ -290,6 +300,17 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: handModel
+      value: 
+      objectReference: {fileID: 1103913222050813811}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: handAnimClip
+      value: 
+      objectReference: {fileID: 4781951162920444690, guid: 0fbf22b5b850be34ba05089748ff09da,
+        type: 3}
     - target: {fileID: 2976184945294053207, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -344,12 +365,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: a8f4fb58da834e34e84a51e5feb67afd, type: 2}
     - target: {fileID: 5140933930951188238, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: a8f4fb58da834e34e84a51e5feb67afd, type: 2}
     - target: {fileID: 7768107640400361558, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -385,6 +406,18 @@ PrefabInstance:
 --- !u!4 &8059173028288502195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420908, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 8059173028288656799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5607465285056700530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2451744752969602541, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 8059173028288656799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1103913222050813811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6955259943716905708, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
     type: 3}
   m_PrefabInstance: {fileID: 8059173028288656799}
   m_PrefabAsset: {fileID: 0}
