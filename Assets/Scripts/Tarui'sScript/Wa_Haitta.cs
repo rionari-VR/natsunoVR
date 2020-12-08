@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Wa_Haitta : MonoBehaviour
 {
+    [SerializeField]
+    int RingInCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +19,15 @@ public class Wa_Haitta : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void RingCount(bool Flg)
     {
-        
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        
+        if(Flg)
+        {
+            RingInCount += 1;
+        }
+        else
+        {
+            RingInCount -= 1;
+        }
     }
 }
