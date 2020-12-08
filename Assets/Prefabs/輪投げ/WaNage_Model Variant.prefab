@@ -63,6 +63,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1774729996329741111, guid: 1be1b4738e582d64f9ccd042b250eb08,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring_Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607553935631549883, guid: 1be1b4738e582d64f9ccd042b250eb08,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring_Bar
+      objectReference: {fileID: 0}
     - target: {fileID: 8528415167904712446, guid: 1be1b4738e582d64f9ccd042b250eb08,
         type: 3}
       propertyPath: m_Name
