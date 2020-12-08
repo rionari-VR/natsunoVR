@@ -17,6 +17,7 @@ TagManager:
   - Laser
   - Poi
   - UI
+  - Ring_Bar
   layers:
   - Default
   - TransparentFX
