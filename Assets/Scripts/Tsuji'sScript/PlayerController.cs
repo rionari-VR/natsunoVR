@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         ccc = camera.GetComponent<CameraColliderComponent>();
 
         trackPad = SteamVR_Actions.default_TrackPad;
-
+        startPosY = transform.position.y;
         isButtonDown = false;
     }
 
@@ -56,14 +56,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         pos = trackPad.GetLastAxis(leftHandType);
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    pos = new Vector2(1.0f, 1.0f);
-        //}
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    pos = new Vector2(-1.0f, -1.0f);
-        //}
+ 
         PayerMove();
 
         foodObj1 = leftGrabScript.GetInHandObject();
@@ -95,13 +88,13 @@ public class PlayerController : MonoBehaviour
             var temp = camera.transform.forward;
             temp.y = 0.0f;
             transform.localPosition += temp / moveSpeedLimits;
-            startPos = transform.localPosition;
+            startPos = transform.position;
 
             if (!isButtonDown)
             {
                 SEManager.Instance.Play(SEPath.ASIOTO01);
                 isButtonDown = true;
-                startPos.y = 0.0f;
+                startPos.y = startPosY;
             }
         }
         else if (pos.y < 0)
@@ -110,13 +103,13 @@ public class PlayerController : MonoBehaviour
             var temp = camera.transform.forward;
             temp.y = 0.0f;
             transform.localPosition -= temp / moveSpeedLimits;
-            startPos = transform.localPosition;
+            startPos = transform.position;
 
             if (!isButtonDown)
             {
                 SEManager.Instance.Play(SEPath.ASIOTO01);
                 isButtonDown = true;
-                startPos.y = 0.0f;
+                startPos.y = startPosY;
             }
         }
 
@@ -126,11 +119,11 @@ public class PlayerController : MonoBehaviour
             time += Time.deltaTime;
             float force = CalcPositionFromForce(time, mass, startPos, Vector3.up * jumpPow, gravity).y;
             transform.position = new Vector3(transform.position.x, force, transform.position.z);
-            if (transform.position.y <= 0.0f)
+            if (transform.position.y <= startPosY)
             {
                 isButtonDown = false;
                 var temp = transform.position;
-                temp.y = 0.0f;
+                temp.y = startPosY;
 
                 transform.position = temp;
                 time = 0;
