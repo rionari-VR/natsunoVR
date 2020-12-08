@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4498433217060887556}
   - component: {fileID: 4498433217060887559}
   - component: {fileID: 4498433217060887558}
+  - component: {fileID: 6978265526623891268}
   m_Layer: 0
   m_Name: "Torus\u5C0F"
   m_TagString: Untagged
@@ -7328,3 +7329,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &6978265526623891268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4498433217060887553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ec23198ae1cee4a996bf82e4dfe62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

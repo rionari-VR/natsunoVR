@@ -11,6 +11,13 @@ TagManager:
   - Keihin
   - Timer
   - bullet
+  - Food
+  - Water Volume
+  - Ball
+  - Laser
+  - Poi
+  - UI
+  - Ring_Bar
   layers:
   - Default
   - TransparentFX

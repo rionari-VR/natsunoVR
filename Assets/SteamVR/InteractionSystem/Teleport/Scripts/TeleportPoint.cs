@@ -76,7 +76,7 @@ namespace Valve.VR.InteractionSystem
 			switchSceneIcon.gameObject.SetActive( false );
 			lockedIcon.gameObject.SetActive( false );
 
-			UpdateVisuals();
+			UpdateVisuals();        //モデルのセット？
 		}
 
 

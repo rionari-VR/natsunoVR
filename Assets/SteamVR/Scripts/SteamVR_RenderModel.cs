@@ -718,7 +718,7 @@ namespace Valve.VR
                     if (renderModelName != modelOverride)
                     {
                         renderModelName = modelOverride;
-                        SetModel(modelOverride);
+                        SetModel(modelOverride);            //モデルのリセット？
                     }
 
                     values = new Hashtable();
