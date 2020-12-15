@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 8688066209467777307}
   - component: {fileID: 4323996271004159013}
   - component: {fileID: 6420595796204524553}
+  - component: {fileID: 7543287765204494359}
   m_Layer: 0
   m_Name: SuperBall_2
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +129,16 @@ MonoBehaviour:
   normalizedVoxelSize: 0.5
   dragInWater: 1
   angularDragInWater: 1
+--- !u!135 &7543287765204494359
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8921850930443409522}
+  m_Material: {fileID: 13400000, guid: 45eb9db264a14934f8a4a52d395171eb, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
