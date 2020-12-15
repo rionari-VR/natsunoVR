@@ -24,6 +24,7 @@ public class ControllerGrabObject : MonoBehaviour
     private string tagGun;
     private string tagFood;
     private string tagPoi;
+    private string tagRing;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class ControllerGrabObject : MonoBehaviour
         tagGun = "Gun";
         tagFood = "Food";
         tagPoi = "Poi";
+        tagRing = "Ring";
 
         handAnimator = handModel.GetComponent<Animator>();
         handAnimator.enabled = false;
@@ -54,8 +56,10 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if (collidingObject)
             {
-                //つかむ処理 :食べ物 & poi
-                if ((collidingObject.tag == tagFood || collidingObject.tag == tagPoi) && objectInHand == null)
+                //つかむ処理 :食べ物 & poi & ring
+                if ((collidingObject.tag == tagFood || 
+                     collidingObject.tag == tagPoi  || 
+                     collidingObject.tag == tagRing ) && objectInHand == null)
                 {
                     GrabObject();
                 }
@@ -96,7 +100,7 @@ public class ControllerGrabObject : MonoBehaviour
             //離す処理
             if (objectInHand)
             {
-                if(objectInHand.tag == tagFood)
+                if(objectInHand.tag == tagFood || objectInHand.tag == tagRing)
                 ReleaseObject();
             }
         }
