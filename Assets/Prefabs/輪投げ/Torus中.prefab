@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3383115332241204317}
   m_Layer: 0
   m_Name: "Torus\u4E2D"
-  m_TagString: Untagged
+  m_TagString: Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

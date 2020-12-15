@@ -18,6 +18,7 @@ TagManager:
   - Poi
   - UI
   - Ring_Bar
+  - Ring
   layers:
   - Default
   - TransparentFX
