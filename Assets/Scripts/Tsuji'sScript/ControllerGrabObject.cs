@@ -10,7 +10,8 @@ public class ControllerGrabObject : MonoBehaviour
     [SerializeField] private SteamVR_Action_Boolean grabAction;
     [SerializeField] private SteamVR_Action_Boolean triggerAction;
 
-    [SerializeField] private GameObject collidingObject; // 1
+    [SerializeField] private GameObject collidingObject;   // 1
+    [SerializeField] private GameObject reverseHandObject; 
     [SerializeField] private GameObject handModel;
     [SerializeField] private AnimationClip handAnimClip;
 
@@ -18,6 +19,8 @@ public class ControllerGrabObject : MonoBehaviour
     private GameObject[]  gunModels;
     private Animator      handAnimator;
     private GunController gunController;
+  //  private Collider      handCollider;
+    private Collider reverseHandCollider;
 
     private float animationStartTime;
     private bool isAnimationFlag;
@@ -44,12 +47,21 @@ public class ControllerGrabObject : MonoBehaviour
         handAnimator.Play(handAnimClip.name, 0, 0);
 
         handAnimator.speed = 3;
+
+        //当たり判定をget
+       // handCollider = gameObject.GetComponent<Collider>();
+        reverseHandCollider = reverseHandObject.GetComponent<Collider>();
     }
     // Update is called once per frame
     void Update()
     {
         //handanimation
         HandAnimationManagement(objectInHand, grabAction.GetLastStateUp(handType), grabAction.GetLastStateDown(handType));
+        if (objectInHand)
+        {
+            //handCollider.enabled = false;
+            reverseHandCollider.enabled = false;
+        }
 
         // 1
         if (grabAction.GetLastStateDown(handType))
