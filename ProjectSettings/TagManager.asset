@@ -19,6 +19,7 @@ TagManager:
   - UI
   - Ring_Bar
   - Ring
+  - Ring_Obj
   layers:
   - Default
   - TransparentFX
@@ -29,8 +30,8 @@ TagManager:
   - 
   - 
   - himo
-  - 
-  - 
+  - Ring_Obj
+  - Ring_Bar
   - 
   - 
   - 

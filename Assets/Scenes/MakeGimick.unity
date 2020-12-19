@@ -947,6 +947,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 458272245893712328, guid: 2f37fd853d217854e8f1a880bdf76985,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1489697426}
     - target: {fileID: 6562294887395270109, guid: 2f37fd853d217854e8f1a880bdf76985,
         type: 3}
       propertyPath: m_Mesh
@@ -2105,6 +2110,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2529591544175311023, guid: 2f99166fadea68c41ae8301e35bf935d,
+        type: 3}
+      propertyPath: intensity
+      value: 0.0001
+      objectReference: {fileID: 0}
     - target: {fileID: 2529591544175311024, guid: 2f99166fadea68c41ae8301e35bf935d,
         type: 3}
       propertyPath: m_CollisionDetection
@@ -2143,6 +2153,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765291679799816106, guid: c3a7c998f4371c742879088eb51bfeae,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6765291679799816107, guid: c3a7c998f4371c742879088eb51bfeae,
         type: 3}

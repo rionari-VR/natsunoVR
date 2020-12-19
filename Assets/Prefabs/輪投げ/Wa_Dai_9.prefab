@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 6765291679799816106}
   m_Layer: 0
   m_Name: Wa_Dai_9
-  m_TagString: Untagged
+  m_TagString: Ring_Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
