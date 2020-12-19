@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mass;
     [SerializeField] private Vector3 gravity;
 
+    //エフェクト関連
+    [SerializeField] private GameObject eatEffect;
+    private GameObject effectPrefab;
+
     private ControllerGrabObject leftGrabScript;
     private ControllerGrabObject rightGrabScript;
     private CameraColliderComponent ccc;
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             if (foodObj1.tag == "Food")
             {
+                if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
                 FoodEat();
             }
 
@@ -73,10 +78,10 @@ public class PlayerController : MonoBehaviour
         {
             if (foodObj2.tag == "Food")
             {
+                if(effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
                 FoodEat();
             }
         }
-
     }
 
     //プレイヤーの移動処理
@@ -128,9 +133,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = temp;
                 time = 0;
             }
-          
         }
-         
     }
 
     //食べ物を食べる
@@ -142,6 +145,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (foodObj1) Destroy(foodObj1);
                 if (foodObj2) Destroy(foodObj2);
+                ccc.SetEatFlag(false);
+                Destroy(effectPrefab);
             }
         }
     }

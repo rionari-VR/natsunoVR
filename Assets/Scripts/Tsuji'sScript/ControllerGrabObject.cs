@@ -69,12 +69,10 @@ public class ControllerGrabObject : MonoBehaviour
             if (collidingObject)
             {
                 //つかむ処理 :食べ物 & poi & ring
-                if ((collidingObject.tag == tagFood || 
-                     collidingObject.tag == tagPoi  || 
-                     collidingObject.tag == tagRing ) && objectInHand == null)
-                {
-                    GrabObject();
-                }
+                if (collidingObject.tag == tagFood && objectInHand == null)  GrabFoodObject();
+                else if (collidingObject.tag == tagRing && objectInHand == null)  GrabRingObject();
+                else if (collidingObject.tag == tagPoi  && objectInHand == null)  GrabPoiObject();
+
                 //つかむ処理 : 銃
                 else if (collidingObject.tag == tagGun && objectInHand == null)
                 {
@@ -184,7 +182,7 @@ public class ControllerGrabObject : MonoBehaviour
     }
 
     //掴む処理
-    private void GrabObject()
+    private void GrabFoodObject()
     {
         // 1
         objectInHand = collidingObject;
@@ -192,7 +190,31 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-        if(objectInHand.tag == tagRing)
+    }
+
+    private void GrabRingObject()
+    {
+        // 1
+        objectInHand = collidingObject;
+        collidingObject = null;
+        // 2　連結処理
+        var joint = AddFixedJoint();
+        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+
+        //TorusOpeをONにする
+        var torus = objectInHand.GetComponentInChildren<TorusOpe>();
+        torus.enabled = true;
+    }
+
+    private void GrabPoiObject()
+    {
+        // 1
+        objectInHand = collidingObject;
+        collidingObject = null;
+        // 2　連結処理
+        var joint = AddFixedJoint();
+        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        if (objectInHand.tag == tagRing)
         {
             var torus = objectInHand.GetComponentInChildren<TorusOpe>();
             torus.enabled = true;
