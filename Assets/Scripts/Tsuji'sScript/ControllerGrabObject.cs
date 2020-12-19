@@ -69,10 +69,14 @@ public class ControllerGrabObject : MonoBehaviour
             if (collidingObject)
             {
                 //つかむ処理 :食べ物 & poi & ring
-                if (collidingObject.tag == tagFood && objectInHand == null)  GrabFoodObject();
-                else if (collidingObject.tag == tagRing && objectInHand == null)  GrabRingObject();
-                else if (collidingObject.tag == tagPoi  && objectInHand == null)  GrabPoiObject();
-
+                if ((collidingObject.tag == tagFood 
+                    || collidingObject.tag == tagRing 
+                    || collidingObject.tag == tagPoi)
+                    && objectInHand == null)
+                {
+                    GrabObject();
+                }
+                    
                 //つかむ処理 : 銃
                 else if (collidingObject.tag == tagGun && objectInHand == null)
                 {
@@ -182,7 +186,7 @@ public class ControllerGrabObject : MonoBehaviour
     }
 
     //掴む処理
-    private void GrabFoodObject()
+    private void GrabObject()
     {
         // 1
         objectInHand = collidingObject;
@@ -191,36 +195,7 @@ public class ControllerGrabObject : MonoBehaviour
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
     }
-
-    private void GrabRingObject()
-    {
-        // 1
-        objectInHand = collidingObject;
-        collidingObject = null;
-        // 2　連結処理
-        var joint = AddFixedJoint();
-        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-
-        //TorusOpeをONにする
-        var torus = objectInHand.GetComponentInChildren<TorusOpe>();
-        torus.enabled = true;
-    }
-
-    private void GrabPoiObject()
-    {
-        // 1
-        objectInHand = collidingObject;
-        collidingObject = null;
-        // 2　連結処理
-        var joint = AddFixedJoint();
-        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-        if (objectInHand.tag == tagRing)
-        {
-            var torus = objectInHand.GetComponentInChildren<TorusOpe>();
-            torus.enabled = true;
-        }
-    }
-
+    
     // 3
     private FixedJoint AddFixedJoint()
     {
@@ -242,6 +217,13 @@ public class ControllerGrabObject : MonoBehaviour
             // 3
             objectInHand.GetComponent<Rigidbody>().velocity = controllerPose.GetVelocity();
             objectInHand.GetComponent<Rigidbody>().angularVelocity = controllerPose.GetAngularVelocity();
+        }
+
+        if (objectInHand.tag == tagRing)
+        {
+            //TorusOpeをONにする
+            var torus = objectInHand.GetComponentInChildren<TorusOpe>();
+            torus.enabled = true;
         }
         // 4
         objectInHand = null;
