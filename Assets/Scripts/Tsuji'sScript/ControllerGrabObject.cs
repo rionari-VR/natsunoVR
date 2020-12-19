@@ -192,6 +192,11 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        if(objectInHand.tag == tagRing)
+        {
+            var torus = objectInHand.GetComponentInChildren<TorusOpe>();
+            torus.enabled = true;
+        }
     }
 
     // 3
