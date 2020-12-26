@@ -167,7 +167,10 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-        
+
+        //掴んだ瞬間に、handのupをGunPrefabのUpに代入(銃の時のみ)
+        objectInHand.transform.up = gameObject.transform.up;
+
         //gunControllerScriptを取得
         gunController = objectInHand.GetComponent<GunController>();
         if (!gunController)
@@ -194,6 +197,10 @@ public class ControllerGrabObject : MonoBehaviour
         // 2　連結処理
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+
+        //掴んだ瞬間にHandのupをobjectのLeftにいれる（upの逆ベクトルをRightに入れる）
+        objectInHand.transform.right = -transform.up;
+
     }
     
     // 3

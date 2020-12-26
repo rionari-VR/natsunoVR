@@ -63,25 +63,25 @@ public class PlayerController : MonoBehaviour
  
         PayerMove();
 
-        foodObj1 = leftGrabScript.GetInHandObject();
-        foodObj2 = rightGrabScript.GetInHandObject();
+        //foodObj1 = leftGrabScript.GetInHandObject();
+        //foodObj2 = rightGrabScript.GetInHandObject();
 
-        if (foodObj1)
-        {
-            if (foodObj1.tag == "Food")
-            {
-                if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
-                FoodEat();
-            }
+        //if (foodObj1)
+        //{
+        //    if (foodObj1.tag == "Food")
+        //    {
+        //        if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
+        //        FoodEat();
+        //    }
 
-        }else if (foodObj2)
-        {
-            if (foodObj2.tag == "Food")
-            {
-                if(effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
-                FoodEat();
-            }
-        }
+        //}else if (foodObj2)
+        //{
+        //    if (foodObj2.tag == "Food")
+        //    {
+        //        if(effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
+        //        FoodEat();
+        //    }
+        //}
     }
 
     //プレイヤーの移動処理
