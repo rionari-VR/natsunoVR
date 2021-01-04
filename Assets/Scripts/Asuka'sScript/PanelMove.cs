@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanelMove : MonoBehaviour
 {
-    public BoxCollider PanelCol;
+    //public BoxCollider PanelCol;
     Animator ani;
 
     // Start is called before the first frame update
@@ -21,8 +21,9 @@ public class PanelMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player"||
-            other.name==PanelCol.name)
+        //if (other.gameObject.tag == "Player" ||
+        //    other.name == PanelCol.name)
+        if (other.gameObject.tag == "Player")
         {
             ani.SetBool("HitPlayer", true);
         }
