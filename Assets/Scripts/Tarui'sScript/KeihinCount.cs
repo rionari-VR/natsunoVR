@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class KeihinCount : MonoBehaviour
 {
-    [SerializeField,Header("足元の景品の最大数")]
+    [SerializeField, Header("足元の景品の最大数")]
     int KeihinNum = 10;
-
-    public static List<Object> Keihin = new List<Object>() { };
 
     bool getFlg = false;
 
-    GameObject getObj;
+    // 合計スコア
+    int Score = 0;
+    public int ScoreCounter
+    {
+        get
+        {
+            return Score;
+        }
+    }
+
+    GameObject getObj = new GameObject();
     public GameObject GetObj
 
     {
@@ -24,16 +32,12 @@ public class KeihinCount : MonoBehaviour
 
     public class Keijou
     {
-        int objNum;     // プレハブの通し番号
-        public int ObjNum
+        GameObject obj;     // プレハブの通し番号
+        public GameObject Obj
         {
             get
             {
-                return objNum;
-            }
-            set
-            {
-                objNum = value;
+                return obj;
             }
         }
         int count;      // 落とした個数
@@ -43,27 +47,36 @@ public class KeihinCount : MonoBehaviour
             {
                 return count;
             }
-            set
-            {
-                count = value;
-            }
         }
 
-        public Keijou(int num)
+        public Keijou(GameObject obj)
         {
-            this.objNum = num;
-            this.count = 1;
+            this.obj = obj;
+            this.count = 0;
         }
 
         public Keijou() { }
+
+        public void AddCount()
+        {
+            this.count += 1;
+        }
     }
 
     public static List<Keijou> keijou = new List<Keijou>() { };
 
+    GameObject keiObj = new GameObject();
+    int i = 0;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Keihin.AddRange(Resources.LoadAll("Keihin"));
+        List<GameObject> ObjList = new List<GameObject>() { };
+        ObjList.AddRange((GameObject[])Resources.LoadAll("Keihin"));
+        for (i = 0; i < ObjList.Count; i++)
+        {
+            keijou.Add(new Keijou(ObjList[i]));
+        }
     }
 
     // Update is called once per frame
@@ -74,34 +87,21 @@ public class KeihinCount : MonoBehaviour
             getFlg = !getFlg;
 
             // どの景品がゲットできたのか
-            for (int i=0;i<Keihin.Count;i++)
+            for (i = 0; i < keijou.Count; i++) 
             {
                 // 景品の照合
-                if(getObj == Keihin[i])
+                if (getObj == keijou[i].Obj)
                 {
-                    bool Flg = false;
+                    keiObj = keijou[i].Obj;
 
                     // 落ちた景品の個数をカウント
-                    for(int j=0;j<keijou.Count;j++)
-                    {
-                        if(keijou[j].ObjNum == i)
-                        {
-                            keijou[j].Count += 1;
-
-                            Flg = true;
-                            break;
-                        }
-                    }
-
-                    // もし新しい種類の景品ならそれのデータを追加
-
-                    if(!Flg)
-                    {
-                        keijou.Add(new Keijou(i));
-                    }
+                    keijou[i].AddCount();
 
                     // ゲットした景品を出現
-                    Instantiate(Keihin[i], this.transform);
+                    Instantiate(keiObj, this.transform);
+
+                    // スコア加算
+                    Score += keiObj.GetComponent<S_Score>().Score;
 
                     break;
                 }
