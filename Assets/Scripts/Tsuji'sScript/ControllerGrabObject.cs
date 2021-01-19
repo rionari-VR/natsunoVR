@@ -114,8 +114,10 @@ public class ControllerGrabObject : MonoBehaviour
             //離す処理
             if (objectInHand)
             {
-                if(objectInHand.tag == tagFood || objectInHand.tag == tagRing)
-                ReleaseObject();
+                if (objectInHand.tag == tagFood || objectInHand.tag == tagRing || objectInHand.tag == tagPoi)
+                {
+                    ReleaseObject();
+                }
             }
         }
     }
@@ -192,6 +194,7 @@ public class ControllerGrabObject : MonoBehaviour
     private void GrabObject()
     {
         // 1
+        collidingObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         objectInHand = collidingObject;
         collidingObject = null;
         // 2　連結処理
@@ -199,7 +202,7 @@ public class ControllerGrabObject : MonoBehaviour
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
 
         //掴んだ瞬間にHandのupをobjectのLeftにいれる（upの逆ベクトルをRightに入れる）
-        objectInHand.transform.right = -transform.up;
+       // objectInHand.transform.right = -transform.up;
 
     }
     
@@ -231,6 +234,10 @@ public class ControllerGrabObject : MonoBehaviour
             //TorusOpeをONにする
             var torus = objectInHand.GetComponentInChildren<TorusOpe>();
             torus.enabled = true;
+        }
+        else if (objectInHand.tag == tagPoi)
+        {
+            objectInHand.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
         // 4
         objectInHand = null;
