@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using UnityEngine.SceneManagement;
 using KanKikuchi.AudioManager;
 
 public class PlayerController : MonoBehaviour
@@ -61,8 +62,13 @@ public class PlayerController : MonoBehaviour
     {
         pos = trackPad.GetLastAxis(leftHandType);
  
-        PayerMove();
+        if(SceneManager.GetActiveScene().name != "SuperBall")
+        {
+           // Debug.Log("Not SuperBallScene");
+            PayerMove();
+        }
 
+        //食べる処理
         //foodObj1 = leftGrabScript.GetInHandObject();
         //foodObj2 = rightGrabScript.GetInHandObject();
 
