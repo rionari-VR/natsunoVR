@@ -19,7 +19,7 @@ public class KeihinCount : MonoBehaviour
         }
     }
 
-    GameObject getObj = new GameObject();
+    GameObject getObj = null;
     public GameObject GetObj
 
     {
@@ -65,7 +65,7 @@ public class KeihinCount : MonoBehaviour
 
     public static List<Keijou> keijou = new List<Keijou>() { };
 
-    GameObject keiObj = new GameObject();
+    GameObject keiObj=null;
     int i = 0;
 
     // Start is called before the first frame update
