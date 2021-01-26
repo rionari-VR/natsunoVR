@@ -62,32 +62,34 @@ public class PlayerController : MonoBehaviour
     {
         pos = trackPad.GetLastAxis(leftHandType);
  
-        if(SceneManager.GetActiveScene().name != "SuperBall")
+        //動けるシーン & 食べられるシーンをひとつに固定 
+        if(SceneManager.GetActiveScene().name == "MatsuriScene")
         {
-           // Debug.Log("Not SuperBallScene");
             PayerMove();
+            //食べる処理
+            foodObj1 = leftGrabScript.GetInHandObject();
+            foodObj2 = rightGrabScript.GetInHandObject();
+
+            if (foodObj1)
+            {
+                if (foodObj1.tag == "Food")
+                {
+                    if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
+                    FoodEat();
+                }
+
+            }
+            else if (foodObj2)
+            {
+                if (foodObj2.tag == "Food")
+                {
+                    if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
+                    FoodEat();
+                }
+            }
         }
 
-        //食べる処理
-        //foodObj1 = leftGrabScript.GetInHandObject();
-        //foodObj2 = rightGrabScript.GetInHandObject();
-
-        //if (foodObj1)
-        //{
-        //    if (foodObj1.tag == "Food")
-        //    {
-        //        if (effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
-        //        FoodEat();
-        //    }
-
-        //}else if (foodObj2)
-        //{
-        //    if (foodObj2.tag == "Food")
-        //    {
-        //        if(effectPrefab == null) effectPrefab = Instantiate(eatEffect, transform);
-        //        FoodEat();
-        //    }
-        //}
+       
     }
 
     //プレイヤーの移動処理
