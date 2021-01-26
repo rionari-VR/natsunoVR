@@ -5,29 +5,53 @@ using UnityEngine;
 public class Wa_Haitta : MonoBehaviour
 {
     [SerializeField]
-    int RingInCount = 0;
+    int RingInCount_S = 0, RingInCount_M = 0, RingInCount_L = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    int MyScore = 0;
+    public int Score
     {
-        
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
-    }
-
-    public void RingCount(bool Flg)
-    {
-        if(Flg)
+        get
         {
-            RingInCount += 1;
+            return MyScore;
+        }
+    }
+
+    public void RingCount(bool Flg, RingScale ring, int score)
+    {
+        if (Flg)
+        {
+            switch (ring)
+            {
+                case RingScale.大:
+                    RingInCount_L += 1;
+                    break;
+                case RingScale.中:
+                    RingInCount_M += 1;
+                    break;
+                case RingScale.小:
+                    RingInCount_S += 1;
+                    break;
+            }
+
+            MyScore += score;
         }
         else
         {
-            RingInCount -= 1;
+            switch (ring)
+            {
+                case RingScale.大:
+                    RingInCount_L -= 1;
+                    break;
+                case RingScale.中:
+                    RingInCount_M -= 1;
+                    break;
+                case RingScale.小:
+                    RingInCount_S -= 1;
+                    break;
+            }
+
+            MyScore -= score;
         }
     }
 }

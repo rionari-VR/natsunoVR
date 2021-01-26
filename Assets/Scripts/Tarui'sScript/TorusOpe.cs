@@ -2,8 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RingScale
+{
+    大,
+    中,
+    小
+}
+
+
 public class TorusOpe : MonoBehaviour
 {
+    [SerializeField]
+    RingScale scale = RingScale.中;
+
+    [SerializeField]
+    int MyScore = 100;
+
     // 入っているか(個数重複防止)
     bool isInRing = false;
 
@@ -28,7 +42,7 @@ public class TorusOpe : MonoBehaviour
         {
             isInRing = true;
 
-            CountObject.RingCount(true);
+            CountObject.RingCount(true, scale, MyScore);
         }
     }
 
@@ -39,7 +53,7 @@ public class TorusOpe : MonoBehaviour
         {
             isInRing = false;
 
-            CountObject.RingCount(false);
+            CountObject.RingCount(false, scale, MyScore);
         }
     }
 }

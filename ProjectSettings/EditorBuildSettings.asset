@@ -11,10 +11,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: e823e573a604765459bc417243cd46b1
-  - enabled: 1
-    path: Assets/Scenes/StageSelect.unity
-    guid: 9f43b09cc44a553498d0369ff42d06e0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MatsuriScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/SuperBall.unity
+    guid: 5ca8ace94bd00914d88aca56373ef02d
+  - enabled: 1
+    path: Assets/Scenes/GunShooting.unity
+    guid: 97ca6a0ee6b9c8a4aa8ad309db4c9442
+  - enabled: 1
+    path: Assets/Scenes/GunShooting_Ver2.unity
+    guid: 6d89fb8c10472704881b9c20d6cdfe58
+  - enabled: 1
+    path: Assets/Scenes/MakeGimick.unity
+    guid: a3af4bffa742867458b30b18388ef327
+  - enabled: 1
+    path: Assets/Scenes/SuperBallScoop.unity
+    guid: d4edeb1f158631344a4d2bbcd1c92d99
+  - enabled: 1
+    path: Assets/Scenes/Wanage.unity
+    guid: 760cc6a1bcdd86b44b8879c50f4c5b74
   m_configObjects: {}
