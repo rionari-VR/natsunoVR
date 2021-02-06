@@ -188,6 +188,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
+      propertyPath: ringObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
       propertyPath: handModel
       value: 
       objectReference: {fileID: 5607465285056700530}
@@ -202,6 +207,24 @@ PrefabInstance:
       propertyPath: reverseHandObject
       value: 
       objectReference: {fileID: 8059173028288764731}
+    - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8705668972279660895, guid: 2f37fd853d217854e8f1a880bdf76985,
+        type: 3}
+    - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 7055945572980450051, guid: 4c379882b25a95942b8beee2e1c061ce,
+        type: 3}
+    - target: {fileID: 62538991996903292, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 4498433217060887553, guid: 8da60e834c9e01848a954fc648fd506b,
+        type: 3}
     - target: {fileID: 952066435489744963, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_Enabled
@@ -229,6 +252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
+      propertyPath: ringObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
       propertyPath: handModel
       value: 
       objectReference: {fileID: 1103913222050813811}
@@ -243,6 +271,24 @@ PrefabInstance:
       propertyPath: reverseHandObject
       value: 
       objectReference: {fileID: 8059173028288532765}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8705668972279660895, guid: 2f37fd853d217854e8f1a880bdf76985,
+        type: 3}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 7055945572980450051, guid: 4c379882b25a95942b8beee2e1c061ce,
+        type: 3}
+    - target: {fileID: 1153119315475334377, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
+        type: 3}
+      propertyPath: ringObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 4498433217060887553, guid: 8da60e834c9e01848a954fc648fd506b,
+        type: 3}
     - target: {fileID: 2976184945294053207, guid: b9cfec4b2bc9e3e4db282f987e7b03ad,
         type: 3}
       propertyPath: m_LocalRotation.x
