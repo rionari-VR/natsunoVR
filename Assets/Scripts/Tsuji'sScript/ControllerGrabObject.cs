@@ -83,6 +83,8 @@ public class ControllerGrabObject : MonoBehaviour
                 if (objectInHand == null)
                 {
                     objectInHand = Instantiate(ringObjects[ringCount], transform);
+                    var joint = AddFixedJoint();
+                    joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
                 }
                 else
                 {
@@ -97,6 +99,8 @@ public class ControllerGrabObject : MonoBehaviour
                             ringCount = 0;
                         }
                         objectInHand = Instantiate(ringObjects[ringCount], transform);
+                        var joint = AddFixedJoint();
+                        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
                     }
                     else if (pos.y < 0 && touchTrackPadTime >= 0.5f)
                     {
@@ -108,7 +112,10 @@ public class ControllerGrabObject : MonoBehaviour
                         {
                             ringCount = ringObjects.Length - 1;
                         }
+
                         objectInHand = Instantiate(ringObjects[ringCount], transform);
+                        var joint = AddFixedJoint();
+                        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
                     }
 
                 }
