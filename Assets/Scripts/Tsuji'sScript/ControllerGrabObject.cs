@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using UnityEngine.SceneManagement;
 
 public class ControllerGrabObject : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class ControllerGrabObject : MonoBehaviour
     [SerializeField] private SteamVR_Behaviour_Pose controllerPose;     
     [SerializeField] private SteamVR_Action_Boolean grabAction;
     [SerializeField] private SteamVR_Action_Boolean triggerAction;
+    [SerializeField] private SteamVR_Action_Vector2 trackPad;
 
     [SerializeField] private GameObject collidingObject;   // 1
     [SerializeField] private GameObject reverseHandObject; 
     [SerializeField] private GameObject handModel;
     [SerializeField] private AnimationClip handAnimClip;
+
+    [SerializeField] private GameObject[] ringObjects;
 
     private GameObject    objectInHand; // 2
     private GameObject[]  gunModels;
@@ -21,8 +25,11 @@ public class ControllerGrabObject : MonoBehaviour
     private GunController gunController;
   //  private Collider      handCollider;
     private Collider reverseHandCollider;
+    private Vector2 pos;
 
+    private int ringCount;
     private float animationStartTime;
+    private float touchTrackPadTime;
     private bool isAnimationFlag;
     private string tagGun;
     private string tagFood;
@@ -47,10 +54,12 @@ public class ControllerGrabObject : MonoBehaviour
         handAnimator.Play(handAnimClip.name, 0, 0);
 
         handAnimator.speed = 3;
-
+        ringCount = 0;
         //当たり判定をget
        // handCollider = gameObject.GetComponent<Collider>();
         reverseHandCollider = reverseHandObject.GetComponent<Collider>();
+   
+        trackPad = SteamVR_Actions.default_TrackPad;
     }
     // Update is called once per frame
     void Update()
@@ -62,15 +71,53 @@ public class ControllerGrabObject : MonoBehaviour
             //handCollider.enabled = false;
             reverseHandCollider.enabled = false;
         }
-
-        // 1
+   
+        // Grab
         if (grabAction.GetLastStateDown(handType))
         {
-            if (collidingObject)
+            //輪投げシーンなら
+            if (SceneManager.GetSceneByName("Wanage").buildIndex == SceneManager.GetActiveScene().buildIndex)
             {
+                touchTrackPadTime += Time.deltaTime;
+                pos = trackPad.GetLastAxis(handType);
+                if (objectInHand == null)
+                {
+                    objectInHand = Instantiate(ringObjects[ringCount], transform);
+                }
+                else
+                {
+                    if (pos.y > 0 && touchTrackPadTime >= 0.5f)
+                    {
+                        touchTrackPadTime = 0;
+                        Destroy(objectInHand.gameObject);
+                        objectInHand = null;
+                        ringCount++;
+                        if (ringCount >= ringObjects.Length)
+                        {
+                            ringCount = 0;
+                        }
+                        objectInHand = Instantiate(ringObjects[ringCount], transform);
+                    }
+                    else if (pos.y < 0 && touchTrackPadTime >= 0.5f)
+                    {
+                        touchTrackPadTime = 0;
+                        Destroy(objectInHand.gameObject);
+                        objectInHand = null;
+                        ringCount--;
+                        if (ringCount < 0)
+                        {
+                            ringCount = ringObjects.Length - 1;
+                        }
+                        objectInHand = Instantiate(ringObjects[ringCount], transform);
+                    }
+
+                }
+            }
+            else if (collidingObject)
+            { 
                 //つかむ処理 :食べ物 & poi & ring
                 if ((collidingObject.tag == tagFood 
-                    || collidingObject.tag == tagRing 
+                   // || collidingObject.tag == tagRing 
                     || collidingObject.tag == tagPoi)
                     && objectInHand == null)
                 {
@@ -99,14 +146,15 @@ public class ControllerGrabObject : MonoBehaviour
             }
         }
         
-        if (triggerAction.GetStateDown(handType))
-        {
-            if (objectInHand)
-            {
-                if (objectInHand.tag == tagGun)
-                    gunController.MagReload();
-            }
-        }
+        //リロード
+        //if (triggerAction.GetStateDown(handType))
+        //{
+        //    if (objectInHand)
+        //    {
+        //        if (objectInHand.tag == tagGun)
+        //            gunController.MagReload();
+        //    }
+        //}
 
         // 2
         if (grabAction.GetLastStateUp(handType))
