@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class TimerDraw : MonoBehaviour
 {
+    [SerializeField]
     private int minute;
+    [SerializeField]
     private float seconds;
     private float oldSecond;
     private Text TimerText;
@@ -30,11 +32,12 @@ public class TimerDraw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (minute >= 0 && seconds > 0)
+        if (minute >= 0 && seconds >= 0 && TimerEnd == false) 
         {
             seconds -= Time.deltaTime;
         }else
         {
+            seconds = 0.0f;
             TimerEnd = true;
         }
 
