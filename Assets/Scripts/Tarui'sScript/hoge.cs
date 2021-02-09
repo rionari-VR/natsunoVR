@@ -7,12 +7,12 @@ public class hoge : MonoBehaviour
     [SerializeField]
     GameObject game,game2,game3;
 
-    Wa_Haitta end;
+    KeihinCount end;
 
     // Start is called before the first frame update
     void Start()
     {
-        end = GameObject.Find("Counter").GetComponent<Wa_Haitta>();
+        end = GameObject.Find("KeihinCount_Ver2").GetComponent<KeihinCount>();
     }
 
     // Update is called once per frame
