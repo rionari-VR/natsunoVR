@@ -15,9 +15,6 @@ public class TorusOpe : MonoBehaviour
     [SerializeField]
     RingScale scale = RingScale.中;
 
-    [SerializeField]
-    int MyScore = 100;
-
     // 入っているか(個数重複防止)
     bool isInRing = false;
 
@@ -42,7 +39,7 @@ public class TorusOpe : MonoBehaviour
         {
             isInRing = true;
 
-            CountObject.RingCount(true, scale, MyScore);
+            CountObject.RingCount(true, scale);
         }
     }
 
@@ -53,7 +50,7 @@ public class TorusOpe : MonoBehaviour
         {
             isInRing = false;
 
-            CountObject.RingCount(false, scale, MyScore);
+            CountObject.RingCount(false, scale);
         }
     }
 }

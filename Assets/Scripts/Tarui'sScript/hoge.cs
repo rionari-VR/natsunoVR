@@ -7,10 +7,12 @@ public class hoge : MonoBehaviour
     [SerializeField]
     GameObject game,game2,game3;
 
+    Wa_Haitta end;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        end = GameObject.Find("Counter").GetComponent<Wa_Haitta>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,11 @@ public class hoge : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Instantiate(game3, this.transform.position, Quaternion.identity);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            end.GameEnd();
         }
     }
 }
